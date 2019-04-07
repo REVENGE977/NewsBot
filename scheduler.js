@@ -55,12 +55,9 @@ async function SendUpdate(channels = [], sender = "user", ){
 
     /* Check if article exists already */
     if (sender === "bot"){
-        try {
-            await Database.NewsArticleExists(title);
-        } catch (error){
-            console.log(error);
+        if (await Database.NewsArticleExists(title)){
+            return console.log("News article already exists.");
         }
-        return;
     }
 
     body = body.replace(undefined, "");
@@ -90,9 +87,7 @@ async function SendUpdate(channels = [], sender = "user", ){
     });
 
     if (sender === "bot"){
-        try {
-            await Database.AddNewsArticle(title);
-        } catch (error) { console.log(error); }
+        if (!await Database.AddNewsArticle(title)){ console.log("Error while adding news article to DB!"); }
     }
 }
 
