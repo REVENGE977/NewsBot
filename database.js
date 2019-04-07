@@ -3,6 +3,7 @@ const user = require('./private').user;
 const password = require('./private').password;
 
 class Database {
+    /* Create new connection upon construction */
     constructor(){
         this.connection = mysql.createConnection({
             host:"localhost",
@@ -19,6 +20,7 @@ class Database {
                 });
         });
     }
+    /* Add new Discord channel to DB */
     async AddChannel(channelID){
         let sql = "SELECT COUNT(*) as count FROM CSGONewsBot.channels WHERE channelID = ?";
         let args = [channelID];
@@ -31,6 +33,7 @@ class Database {
             return "Channel successfully added!";
         } else { return "Channel already added!" }
     }
+    /* Remove Discord channel from DB */
     async RemoveChannel(channelID) {
         let sql = "DELETE FROM CSGONewsBot.channels WHERE channelID = ?";
         let args = [channelID];
@@ -38,6 +41,7 @@ class Database {
         await this.query(sql, args);
         return "Channel successfully removed.";
     }
+    /* Get all stored Discord channels from DB */
     async GetChannels(){
         let sql = "SELECT (channelID) FROM CSGONewsBot.channels";
         let result = await this.query(sql, []), output = [];
@@ -49,6 +53,7 @@ class Database {
 
         return output;
     }
+    /* Check if news article has already been shown */
     async NewsArticleExists(title){
         let sql = "SELECT COUNT(*) as count FROM CSGONewsBot.newsitems WHERE title = ?";
         let args = [title];
@@ -56,6 +61,7 @@ class Database {
         let result = await this.query(sql, args);
         return result[0].count > 0;
     }
+    /* Add news article to list of already shown articles */
     async AddNewsArticle(title){
         let sql = "INSERT INTO CSGONewsBot.newsitems(title) VALUES (?)";
         let args = [title];
