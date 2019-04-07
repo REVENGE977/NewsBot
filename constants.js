@@ -7,6 +7,20 @@ const BotCommands = {
         "syntax":"!help ?<subject>",
         "example":"!help win"
     },
+    "addchannel":{
+        "command":"!addchannel",
+        "description":
+            "Adds current channel to subscription list of regular CS:GO update articles.",
+        "syntax":"!addchannel",
+        "example":"!addchannel"
+    },
+    "removechannel":{
+        "command":"!removechannel",
+        "description":
+            "Removes current channel from subscription list of regular CS:GO update articles.",
+        "syntax":"!removechannel",
+        "example":"!removechannel"
+    },
     "getupdate":{
         "command":"!getupdate",
         "description":
