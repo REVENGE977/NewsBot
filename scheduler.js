@@ -13,7 +13,7 @@ function CreateCSNewsSchedule(Timer){
     return cron.schedule(
         Timer, () => {
             try {SendUpdate([],"bot")} catch(e) { console.log(e); }
-            console.log("News getter scheduled");
+            console.log("News getter scheduled...");
         }, { scheduled: false, timezone: "Europe/Helsinki" });
 }
 
