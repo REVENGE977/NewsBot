@@ -1,12 +1,14 @@
 const mysql = require('mysql');
-const user = require('./private').user;
-const password = require('./private').password;
+const Private = require('./private');
+const user = Private.user;
+const password = Private.password;
+const host = Private.host;
 
 class Database {
     /* Create new connection pool upon construction */
     constructor(){
         this.connectionPool = mysql.createPool({
-            host:"localhost",
+            host:host,
             user:user,
             password:password
         });
