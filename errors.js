@@ -15,14 +15,6 @@ class InvalidArguementsError {
         return this.Error;
     }
 }
-class MySQLError {
-    constructor(){
-        this.Error = "Can't connect to database.";
-    }
-    get error(){
-        return this.Error;
-    }
-}
 class UnauthorizedError {
     constructor(){
         this.Error = "You aren't authorized to do that!";
@@ -34,5 +26,4 @@ class UnauthorizedError {
 
 module.exports.UnknownCommandError = UnknownCommandError;
 module.exports.InvalidArguementsError = InvalidArguementsError;
-module.exports.MySQLError = MySQLError;
 module.exports.UnauthorizedError = UnauthorizedError;
