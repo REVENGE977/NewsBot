@@ -66,4 +66,4 @@ module.exports = {
 We're open to suggestions and questions! Please send your message to [admin@cachemaps.net](mailto:admin@cachemaps.net?subject=CSGONewsBot).
 
 ### Contributors
-The only contributor of this repository is Zecuel. You can contact him [by email]([admin@cachemaps.net](mailto:admin@cachemaps.net?subject=CSGONewsBot).
+The only contributor of this repository is Zecuel. You can contact him [by email](mailto:admin@cachemaps.net?subject=CSGONewsBot).
