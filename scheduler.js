@@ -9,10 +9,10 @@ const Database = new DatabaseCL();
 const CSNewsSchedule = CreateCSNewsSchedule("0 0 */2 * * *");
 
 function CreateCSNewsSchedule(Timer){
-    if (!cron.validate(Timer)){  console.log("Invalid cron timer."); return; }
+    if (!cron.validate(Timer)){  return console.log("Invalid cron timer."); }
     return cron.schedule(
         Timer, () => {
-            try {SendUpdate([],"bot")} catch(e) { console.log(e); }
+            SendUpdate([],"bot");
             console.log("News getter scheduled...");
         }, { scheduled: false, timezone: "Europe/Helsinki" });
 }
@@ -89,8 +89,6 @@ async function SendUpdate(channels = [], sender = "user", ){
         if (!await Database.AddNewsArticle(title)){ console.log("Error while adding news article to DB!"); }
     }
 }
-
-module.exports.CSNewsSchedule = CSNewsSchedule;
 
 module.exports.CreateCSNewsSchedule = CreateCSNewsSchedule;
 module.exports.SendUpdate = SendUpdate;
