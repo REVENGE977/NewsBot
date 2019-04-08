@@ -4,10 +4,10 @@ CSGONewsBot is a Discord bot which crawls the CS:GO updates -page and checks for
 Whenever there is a new update post, it will send the post as a Discord message to all Discord channels that are subscribed to the bot's news schedule.
 
 ## How to use
-* _To add this bot to your Discord server_, use [this link](https://discordapp.com/api/oauth2/authorize?client_id=562687174697549856&permissions=522304&scope=bot):
+* Add this bot to your Discord server with [this link](https://discordapp.com/api/oauth2/authorize?client_id=562687174697549856&permissions=522304&scope=bot):
 
-* To add the current Discord channel to the news schedule, write "!addchannel".
+* Add the desired Discord text channel to the news schedule by writing the command ´!addchannel`.
 
-* To remove the current Discord channel from the news schedule, write "!removechannel".
+* If you want to remove a Discord text channel from the news schedule, write the command ´!removechannel`.
 
-* If you want to manually get the latest update, write "!getupdate". This will post the latest news article on the current Discord channel.
+* You can get the latest update article instantly by writing the command `!getupdate` on the desider Discord text channel.
