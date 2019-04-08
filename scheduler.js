@@ -7,7 +7,7 @@ const Index = require('./index');
 const Database = new DatabaseCL();
 
 const o = "0 0 */2 * * *";
-const CSNewsSchedule = CreateCSNewsSchedule("0 */2 * * * *");
+const CSNewsSchedule = CreateCSNewsSchedule(o);
 
 function CreateCSNewsSchedule(Timer){
     if (!cron.validate(Timer)){  console.log("Invalid cron timer."); return; }

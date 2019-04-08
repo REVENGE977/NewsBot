@@ -3,9 +3,9 @@ const user = require('./private').user;
 const password = require('./private').password;
 
 class Database {
-    /* Create new connection upon construction */
+    /* Create new connection pool upon construction */
     constructor(){
-        this.connection = mysql.createConnection({
+        this.connectionPool = mysql.createPool({
             host:"localhost",
             user:user,
             password:password
@@ -13,11 +13,17 @@ class Database {
     }
     query(sql, args){
         return new Promise((resolve, reject) => {
-            this.connection.query(sql, args, (error, result) => {
+            this.connectionPool.getConnection(error, connection => {
+                if (error) { return reject(error); }
+
+                connection.query(sql, args, (error, result) => {
+                    connection.release();
+
                     if (error) { return reject(error); }
 
                     resolve(result);
                 });
+            });
         });
     }
     /* Add new Discord channel to DB */
