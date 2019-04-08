@@ -15,7 +15,7 @@ class Database {
     }
     query(sql, args){
         return new Promise((resolve, reject) => {
-            this.connectionPool.getConnection(error, connection => {
+            this.connectionPool.getConnection((error, connection) => {
                 if (error) { return reject(error); }
 
                 connection.query(sql, args, (error, result) => {

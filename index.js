@@ -34,10 +34,14 @@ client.on("ready", () => {
                 message.reply(response.message ? response.message : response.error);
                 break;
             case '!addchannel':
-                Database.AddChannel(message.channel.id).then(response => message.reply(response));
+                Database.AddChannel(message.channel.id)
+                    .then(response => { message.reply(response); })
+                    .catch(error => { message.reply(error); });
                 break;
             case '!removechannel':
-                Database.RemoveChannel(message.channel.id).then(response => message.reply(response));
+                Database.RemoveChannel(message.channel.id)
+                    .then(response => { message.reply(response); })
+                    .catch(error => { message.reply(error); });
                 break;
             case '!getupdate':
                 Scheduler.SendUpdate([message.channel.id]);
