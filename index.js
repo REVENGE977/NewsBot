@@ -18,7 +18,6 @@ client.login(BotPass);
 
 client.on("ready", () => {
 
-    module.exports.client = client;
     console.log("Bot connected!");
 
     client.on("message", (message) => {
