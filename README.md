@@ -71,7 +71,7 @@ Any contributions are welcome! Currently, these are the main issues with this re
 We're open to suggestions and questions! Please send your message to [admin@cachemaps.net](mailto:admin@cachemaps.net?subject=CSGONewsBot).
 
 ### Contributors
-The only contributor of this repository is Zecuel. You can contact him [by email](mailto:admin@cachemaps.net?subject=CSGONewsBot).
+Currently, the only contributor of this repository is Zecuel. You can contact him [by email](mailto:admin@cachemaps.net?subject=CSGONewsBot).
 
 ### Licence 
 This repository is licenced under the MIT license. Anyone is allowed to modify, share or use this repository, even commercially.
