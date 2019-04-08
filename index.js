@@ -97,6 +97,7 @@ function GetBotCommands(args) {
         /* If command exists.. */
         if (constants.BotCommands[command]) {
             messageBody = "\nCommand:      " + constants.BotCommands[command]["command"] + "\n";
+            messageBody += "Description:    " + constants.BotCommands[command]["description"] + "\n\n";
             messageBody += "Syntax:             " + constants.BotCommands[command]["syntax"] + "\n";
             messageBody += "Example:          " + constants.BotCommands[command]["example"] + "\n\n";
             messageBody += "If a command parameter includes a question mark (?), that parameter is optional.";
