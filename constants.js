@@ -5,7 +5,7 @@ const BotCommands = {
             "Show useful information about a command " +
             "or show list of commands.",
         "syntax":"!help ?<subject>",
-        "example":"!help win"
+        "example":"!help getupdate"
     },
     "addchannel":{
         "command":"!addchannel",
