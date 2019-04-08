@@ -62,7 +62,7 @@ module.exports = {
 ```
 
 
-### Have a suggestion or questions?
+### Have a suggestion or question?
 We're open to suggestions and questions! Please send your message to [admin@cachemaps.net](mailto:admin@cachemaps.net?subject=CSGONewsBot).
 
 ### Contributors
