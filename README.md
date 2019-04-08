@@ -30,5 +30,37 @@ You should now be able to run the bot using
 node index.js
 ```
 
-### Have a suggestion?
-I'm open to suggestions! Please send your idea to [admin@cachemaps.net](mailto:admin@cachemaps.net?subject=CSGONewsBot%20suggestion).
+Now that you have the code itself running, you need to create a new Discord bot. I'd recommend following [this](https://discordpy.readthedocs.io/en/rewrite/discord.html) guide by Discord.py.
+
+You need create a database to store the news articles and Discord channels in. You will also need to store your bot- and database credentials in a file called `private.js`.
+
+The tables should look like this:
+
+```
+newsitems(title varchar(50) NOT NULL)
+channels(channelID varchar(50) NOT NULL)
+```
+
+Your `private.js` should look like this:
+
+```
+const host = "yourhost";
+const user = "youruser";
+const password = "yourpassword";
+
+const BotPass = "Bot password acquired earlier in Discord.Py guide";
+
+let AdminID = "Find your ID by adding 'message.reply(message.author.id);' somewhere in the index.js";
+
+module.exports = {
+    host: host,
+    user: user,
+    password: password,
+    BotPass: BotPass,
+    AdminID: AdminID
+};
+```
+
+
+### Have a suggestion or questions?
+I'm open to suggestions and questions! Please send your message to [admin@cachemaps.net](mailto:admin@cachemaps.net?subject=CSGONewsBot%20suggestion).
