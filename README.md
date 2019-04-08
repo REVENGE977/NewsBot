@@ -17,6 +17,7 @@ Whenever there is a new update article, it will send the article as a Discord me
 
 ## Want to build your own version of this bot?
 Copy this repository to the target directory and enter it.
+
 To be able to run this bot, you will have to install a few dependencies using NPM. If your machine does not use NPM, install it following [these instructions](https://www.npmjs.com/get-npm).
 
 While in the repository directory, run these commands:
