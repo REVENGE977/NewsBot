@@ -43,7 +43,7 @@ client.on("ready", () => {
                     .catch(error => { message.reply(error); });
                 break;
             case '!getupdate':
-                message.reply("Getting update article, please wait...");
+                message.reply("Getting update article, please wait...").then((msg => msg.delete(5000)));
                 Scheduler.SendUpdate([message.channel.id]);
                 break;
             case '!schedulestart':
@@ -61,7 +61,7 @@ client.on("ready", () => {
             default:
                 /* Invalid command entered */
                 if (command.startsWith("!")){
-                    message.reply(new UnknownCommandError(command).error);
+                    message.reply(new UnknownCommandError(command).error + "\nIf you need help, type \"!help\"");
                 }
                 break;
         }
