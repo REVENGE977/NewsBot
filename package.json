@@ -2,7 +2,12 @@
   "name": "CSGONewsBot",
   "version": "1.0.0",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "discord.js": "^11.4.2",
-    "node-cron": "^2.0.3"
+    "mysql": "^2.16.0",
+    "node-cron": "^2.0.3",
+    "puppeteer": "^1.14.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
   }
 }

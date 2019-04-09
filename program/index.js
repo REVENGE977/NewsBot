@@ -25,12 +25,12 @@ client.on("ready", () => {
         /* Split command by space */
         let args = message.toString().split(" ");
 
-        let command, response;
+        let command, commandResponse;
 
         switch (command = args[0]){
             case '!help':
-                response = GetBotCommands(args);
-                message.reply(response.message ? response.message : response.error);
+                commandResponse = GetBotCommands(args);
+                message.reply(commandResponse.message ? commandResponse.message : commandResponse.error);
                 break;
             case '!addchannel':
                 Database.AddChannel(message.channel.id)
@@ -47,14 +47,14 @@ client.on("ready", () => {
                 break;
             case '!schedulestart':
                 if (message.author.id === AdminID){
-                    response = Scheduler.StartSchedule();
-                    message.reply(response.message ? response.message : response.error);
+                    commandResponse = Scheduler.StartSchedule();
+                    message.reply(commandResponse.message ? commandResponse.message : commandResponse.error);
                 } else { message.reply(new UnauthorizedError().error); }
                 break;
             case '!schedulestop':
                 if (message.author.id === AdminID){
-                    response = Scheduler.StopSchedule();
-                    message.reply(response.message ? response.message : response.error);
+                    commandResponse = Scheduler.StopSchedule();
+                    message.reply(commandResponse.message ? commandResponse.message : commandResponse.error);
                 } else { message.reply(new UnauthorizedError().error); }
                 break;
             default:
