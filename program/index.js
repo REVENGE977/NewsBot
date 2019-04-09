@@ -43,6 +43,7 @@ client.on("ready", () => {
                     .catch(error => { message.reply(error); });
                 break;
             case '!getupdate':
+                message.reply("Getting update article, please wait...");
                 Scheduler.SendUpdate([message.channel.id]);
                 break;
             case '!schedulestart':
