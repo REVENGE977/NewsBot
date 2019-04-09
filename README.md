@@ -29,7 +29,7 @@ First, you will have to install Node.js. After installing Node.js, you should al
 
 Next, while in the repository directory, run these commands:
 ```
-npm install --save discordjs
+npm install --save discord.js
 npm install --save request request-promise cheerio puppeteer
 ```
 You should now be able to run the bot using
