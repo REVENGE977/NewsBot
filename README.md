@@ -87,7 +87,7 @@ module.exports = {
 Any contributions are welcome! Currently, these are the main issues with this repo:
 * No proper error handling in places
 * Non-OOP sections of the codebase
-* Inconsistency accross files and functions
+* Inconsistency across files and functions
 
 ### Have a suggestion or question?
 We're open to suggestions and questions! Please send your message to 
