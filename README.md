@@ -27,14 +27,27 @@ Copy this repository to the target directory and enter it.
 To be able to run this bot, you will have to install a few dependencies. 
 First, you will have to install Node.js. After installing Node.js, you should also have NPM installed.
 
-Next, while in the repository directory, run these commands:
+Next, while in the repository directory:
+
+Install required dependency:
+
 ```
 npm install --save discord.js
-npm install --save request request-promise cheerio puppeteer
 ```
+
+Install dependencies required by `Scraper.js`:
+```
+npm install --save request request-promise cheerio
+```
+
+Install dependencies required by `Scheduler.js` :
+```
+npm install --save node-cron
+```
+
 You should now be able to run the bot using
 ```
-node index.js
+node program/index.js
 ```
 
 Now that you have the code itself running, you need to create a new Discord bot. I'd recommend following 
@@ -59,7 +72,7 @@ const password = "yourpassword";
 
 const BotPass = "Bot password acquired earlier in Discord.Py guide";
 
-let AdminID = "Find your ID by adding 'message.reply(message.author.id);' somewhere in the index.js";
+const AdminID = "Find your ID by adding 'message.reply(message.author.id);' somewhere in the index.js";
 
 module.exports = {
     host: host,
