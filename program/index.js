@@ -33,12 +33,12 @@ client.on("ready", () => {
                 message.reply(commandResponse.message ? commandResponse.message : commandResponse.error);
                 break;
             case '!addchannel':
-                Database.AddChannel(message.channel.id)
+                Database.AddChannel(args[1], message.channel.id)
                     .then(response => { message.reply(response); })
                     .catch(error => { message.reply(error); });
                 break;
             case '!removechannel':
-                Database.RemoveChannel(message.channel.id)
+                Database.RemoveChannel(args[1], message.channel.id)
                     .then(response => { message.reply(response); })
                     .catch(error => { message.reply(error); });
                 break;

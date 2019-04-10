@@ -46,22 +46,24 @@ async function SendUpdate(game, channels = [], sender = "user", ){
 
     let scraperOutput, link, title, body, image, messageTitle;
 
+    channels = await Database.GetChannels(game);
+
     if (sender === "bot"){
         switch(game){
             case 'csgo':
 
-                messageTitle = "__**Latest CS:GO update:**__\n";
                 image = "counter_strike_wallpaper.png";
 
-                if (sender === "bot"){
-                    messageTitle = "__**New CS:GO update released!**__\n";
-                    if (await Database.CSGONewsArticleExists(title)){ return console.log("Old article."); }
-                }
-
-                channels = await Database.GetCSGOChannels();
                 scraperOutput = await GetNewestCSGOUpdate();
 
                 link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
+
+                messageTitle = "__**Latest CS:GO update:**__\n";
+
+                if (sender === "bot"){
+                    messageTitle = "__**New CS:GO update released!**__\n";
+                    if (await Database.NewsArticleExists(game,title)){ return console.log("Old article."); }
+                }
 
 
                 body = body.replace(/(\[[A-Za-z0-9]+])/g, (original) => {
@@ -99,7 +101,7 @@ async function SendUpdate(game, channels = [], sender = "user", ){
     });
 
     if (sender === "bot"){
-        if (!await Database.AddNewsArticle(title)){ console.log("Error while adding news article to DB!"); }
+        if (!await Database.AddNewsArticle(game,title)){ console.log("Error while adding news article to DB!"); }
     }
 }
 
