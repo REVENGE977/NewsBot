@@ -20,7 +20,7 @@ function CreateCRONSchedule(Timer){
         }, { scheduled: false, timezone: "Europe/Helsinki" });
 }
 
-/* Starts a given Cron Schedule */
+/* Starts Cron Schedule */
 function StartSchedule(){
     let output = {};
     console.log("Starting cron schedule...");
@@ -30,7 +30,7 @@ function StartSchedule(){
     }  else { output.error = "Failed to start cron schedule." }
     return output;
 }
-/* Stops a given Cron schedule */
+/* Stops Cron schedule */
 function StopSchedule(){
     let output = {};
     console.log("Stopping cron schedule...");
