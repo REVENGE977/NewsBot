@@ -49,6 +49,12 @@ You should now be able to run the bot using
 ```
 node program/index.js
 ```
+or
+```
+node index.js
+```
+while in the 'program' directory.
+
 
 Now that the code itself works, you need to create a new Discord bot. I'd recommend following 
 [this guide](https://discordpy.readthedocs.io/en/rewrite/discord.html) by Discord.py.
