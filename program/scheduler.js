@@ -12,10 +12,10 @@ function CreateCRONSchedule(Timer){
     if (!cron.validate(Timer)){  return console.log("Invalid cron timer."); }
     return cron.schedule(
         Timer, () => {
-            /* Send CS:GO update */
-            SendCSGOUpdate([],"bot");
-            /* Send FOR HONOR update */
             console.log("News getter scheduled...");
+            /* Send CSGO update */
+            SendUpdate("csgo",[],"bot");
+            /* Send FOR HONOR update */
         }, { scheduled: false, timezone: "Europe/Helsinki" });
 }
 
@@ -40,45 +40,56 @@ function StopSchedule(){
     return output;
 }
 
-async function SendCSGOUpdate(channels = [], sender = "user", ){
+async function SendUpdate(game, channels = [], sender = "user", ){
 
-    console.log("Sending CS news...");
+    console.log("Sending news articles...");
+
+    let scraperOutput, link, title, body, image, messageTitle;
 
     if (sender === "bot"){
-        channels = await Database.GetChannels();
-    }
+        switch(game){
+            case 'csgo':
 
-    let output = await GetNewestCSGOUpdate();
+                messageTitle = "__**Latest CS:GO update:**__\n";
+                image = "counter_strike_wallpaper.png";
 
-    if (!output){ return; }
+                if (sender === "bot"){
+                    messageTitle = "__**New CS:GO update released!**__\n";
+                    if (await Database.CSGONewsArticleExists(title)){ return console.log("Old article."); }
+                }
 
-    let link = output[0], title = output[1], body = output[2];
+                channels = await Database.GetCSGOChannels();
+                scraperOutput = await GetNewestCSGOUpdate();
 
-    /* Check if article exists already */
-    if (sender === "bot"){
-        if (await Database.NewsArticleExists(title)){
-            return console.log("News article already exists.");
+                link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
+
+
+                body = body.replace(/(\[[A-Za-z0-9]+])/g, (original) => {
+                    return "\n**" + original + "**";
+                });
+                body = body.replace(/([A-Za-z0-9]+[:])/g, (original) => {
+                    return "\n**" + original + "**";
+                });
+
+                break;
+            default:
+                return console.log("Invalid game: " + game);
         }
     }
 
-    body = body.replace(undefined, "");
+    if (!scraperOutput || !channels){ return; }
 
-    body = body.replace(/(\[[A-Za-z0-9]+])/g, (original) => {
-        return "\n**" + original + "**";
-    });
-    body = body.replace(/([A-Za-z0-9]+[:])/g, (original) => {
-        return "\n**" + original + "**";
-    });
+    body = body.replace(undefined, "");
 
     const embed = new Discord.RichEmbed()
         .setTitle("__**" + title + "**__")
         .setURL(link)
-        .setColor(524419)
-        .attachFiles(["./images/counter_strike_wallpaper.png"])
-        .setImage("attachment://counter_strike_wallpaper.png");
+        .setColor(524419);
 
-    let messageTitle = "__**Latest CS:GO update:**__\n";
-    if (sender === "bot"){ messageTitle = "__**New CS:GO update released!**__\n"; }
+    if (image) {
+        embed.attachFiles(["./images/" + image])
+             .setImage("attachment://" + image);
+    }
 
     channels.forEach((channel) => {
         Index.SendMessage(
@@ -92,7 +103,6 @@ async function SendCSGOUpdate(channels = [], sender = "user", ){
     }
 }
 
-module.exports.CreateCSNewsSchedule = CreateCRONSchedule;
-module.exports.SendUpdate = SendCSGOUpdate;
+module.exports.SendUpdate = SendUpdate;
 module.exports.StartSchedule = StartSchedule;
 module.exports.StopSchedule = StopSchedule;

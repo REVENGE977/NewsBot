@@ -44,7 +44,7 @@ client.on("ready", () => {
                 break;
             case '!getupdate':
                 message.reply("Getting update article, please wait...").then((msg => msg.delete(5000)));
-                Scheduler.SendUpdate([message.channel.id]);
+                Scheduler.SendUpdate("csgo",[message.channel.id]);
                 break;
             case '!schedulestart':
                 if (message.author.id === AdminID){
