@@ -43,8 +43,10 @@ client.on("ready", () => {
                     .catch(error => { message.reply(error); });
                 break;
             case '!getupdate':
-                message.reply("Getting update article, please wait...").then((msg => msg.delete(5000)));
-                Scheduler.SendUpdate("csgo",[message.channel.id]);
+                message.reply("Getting update article, please wait...").then((msg => msg.delete(7000)));
+                Scheduler.SendUpdate(args[1],[message.channel.id])
+                    .then(response => { message.reply(response); })
+                    .catch(error => { message.reply(error); });
                 break;
             case '!schedulestart':
                 if (message.author.id === AdminID){

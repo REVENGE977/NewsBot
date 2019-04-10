@@ -4,18 +4,19 @@ const GetNewestCSGOUpdate = require("./scraper").GetNewestCSGOUpdate;
 const DatabaseCL = require("./database").Database;
 const Index = require('./index');
 
+const Errors = require('./errors');
+
 const Database = new DatabaseCL();
 
-const CRONSchedule = CreateCRONSchedule("0 0 */2 * * *");
+const CRONSchedule = CreateCRONSchedule("0 */2 * * * *");
 
 function CreateCRONSchedule(Timer){
     if (!cron.validate(Timer)){  return console.log("Invalid cron timer."); }
     return cron.schedule(
         Timer, () => {
             console.log("News getter scheduled...");
-            /* Send CSGO update */
             SendUpdate("csgo",[],"bot");
-            /* Send FOR HONOR update */
+            SendUpdate("forhonor", [], "bot");
         }, { scheduled: false, timezone: "Europe/Helsinki" });
 }
 
@@ -42,44 +43,47 @@ function StopSchedule(){
 
 async function SendUpdate(game, channels = [], sender = "user", ){
 
-    console.log("Sending news articles...");
+    console.log("Sending news article...");
 
     let scraperOutput, link, title, body, image, messageTitle;
 
-    channels = await Database.GetChannels(game);
-
     if (sender === "bot"){
-        switch(game){
-            case 'csgo':
-
-                image = "counter_strike_wallpaper.png";
-
-                scraperOutput = await GetNewestCSGOUpdate();
-
-                link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
-
-                messageTitle = "__**Latest CS:GO update:**__\n";
-
-                if (sender === "bot"){
-                    messageTitle = "__**New CS:GO update released!**__\n";
-                    if (await Database.NewsArticleExists(game,title)){ return console.log("Old article."); }
-                }
-
-
-                body = body.replace(/(\[[A-Za-z0-9]+])/g, (original) => {
-                    return "\n**" + original + "**";
-                });
-                body = body.replace(/([A-Za-z0-9]+[:])/g, (original) => {
-                    return "\n**" + original + "**";
-                });
-
-                break;
-            default:
-                return console.log("Invalid game: " + game);
-        }
+        channels = await Database.GetChannels(game);
     }
 
-    if (!scraperOutput || !channels){ return; }
+    switch(game){
+        case 'csgo':
+
+            image = "counter_strike_wallpaper.png";
+
+            scraperOutput = await GetNewestCSGOUpdate();
+
+            link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
+
+            messageTitle = "__**Latest CS:GO update:**__\n";
+
+            if (sender === "bot"){
+                messageTitle = "__**New CS:GO update released!**__\n";
+                if (await Database.NewsArticleExists(game,title)){ return console.log("Old article."); }
+            }
+
+
+            body = body.replace(/(\[[A-Za-z0-9]+])/g, (original) => {
+                return "\n**" + original + "**";
+            });
+            body = body.replace(/([A-Za-z0-9]+[:])/g, (original) => {
+                return "\n**" + original + "**";
+            });
+
+            break;
+        default:
+            console.log("Invalid game: " + game);
+            return "Invalid game: " + game;
+    }
+
+    if (!scraperOutput || !channels){
+        let error = new Errors.InvalidArguementsError().error; console.log(error); return error;
+    }
 
     body = body.replace(undefined, "");
 
@@ -101,7 +105,10 @@ async function SendUpdate(game, channels = [], sender = "user", ){
     });
 
     if (sender === "bot"){
-        if (!await Database.AddNewsArticle(game,title)){ console.log("Error while adding news article to DB!"); }
+        if (!await Database.AddNewsArticle(game,title)){
+            console.log("Error while adding news article to DB!");
+            return "Error while adding news article to DB!";
+        }
     }
 }
 

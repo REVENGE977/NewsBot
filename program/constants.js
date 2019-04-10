@@ -10,36 +10,38 @@ const BotCommands = {
     "addchannel":{
         "command":"!addchannel",
         "description":
-            "Adds current channel to subscription list of regular CS:GO update articles.",
-        "syntax":"!addchannel",
-        "example":"!addchannel"
+            "Adds current channel to subscription list of regular update articles for the given game.",
+        "syntax":"!addchannel <game>",
+        "example":"!addchannel csgo",
+        "argvalues":"csgo"
     },
     "removechannel":{
         "command":"!removechannel",
         "description":
-            "Removes current channel from subscription list of regular CS:GO update articles.",
-        "syntax":"!removechannel",
-        "example":"!removechannel"
+            "Removes current channel from subscription list of regular update articles for the given game.",
+        "syntax":"!removechannel <game>",
+        "example":"!removechannel csgo",
+        "argvalues":"csgo"
     },
     "getupdate":{
         "command":"!getupdate",
         "description":
-            "Sends the latest CS:GO update article to the " +
+            "Sends the latest update article for the given game to the " +
             "channel where this command gets called.",
-        "syntax":"!getupdate",
-        "example":"!getupdate"
+        "syntax":"!getupdate <game>",
+        "example":"!getupdate csgo"
     },
     "schedulestart":{
         "command":"!schedulestart",
         "description":
-            "Starts CS:GO update schedule. Only available to admin.",
+            "Starts update schedule. Only available to admin.",
         "syntax":"!schedulestart",
         "example":"!schedulestart"
     },
     "schedulestop":{
         "command":"!schedulestop",
         "description":
-            "Stops CS:GO update schedule. Only available to admin.",
+            "Stops update schedule. Only available to admin.",
         "syntax":"!schedulestop",
         "example":"!schedulestop"
     }
