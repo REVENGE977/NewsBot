@@ -6,13 +6,15 @@ const Index = require('./index');
 
 const Database = new DatabaseCL();
 
-const CSNewsSchedule = CreateCSNewsSchedule("0 0 */2 * * *");
+const CRONSchedule = CreateCRONSchedule("0 0 */2 * * *");
 
-function CreateCSNewsSchedule(Timer){
+function CreateCRONSchedule(Timer){
     if (!cron.validate(Timer)){  return console.log("Invalid cron timer."); }
     return cron.schedule(
         Timer, () => {
-            SendUpdate([],"bot");
+            /* Send CS:GO update */
+            SendCSGOUpdate([],"bot");
+            /* Send FOR HONOR update */
             console.log("News getter scheduled...");
         }, { scheduled: false, timezone: "Europe/Helsinki" });
 }
@@ -21,8 +23,8 @@ function CreateCSNewsSchedule(Timer){
 function StartSchedule(){
     let output = {};
     console.log("Starting cron schedule...");
-    if (CSNewsSchedule){
-        CSNewsSchedule.start();
+    if (CRONSchedule){
+        CRONSchedule.start();
         output.message = "Cron schedule started successfully!";
     }  else { output.error = "Failed to start cron schedule." }
     return output;
@@ -31,14 +33,14 @@ function StartSchedule(){
 function StopSchedule(){
     let output = {};
     console.log("Stopping cron schedule...");
-    if (CSNewsSchedule){
-        CSNewsSchedule.stop();
+    if (CRONSchedule){
+        CRONSchedule.stop();
         output.message = "Cron schedule stopped successfully.";
     } else { output.error = "Failed to stop cron schedule." }
     return output;
 }
 
-async function SendUpdate(channels = [], sender = "user", ){
+async function SendCSGOUpdate(channels = [], sender = "user", ){
 
     console.log("Sending CS news...");
 
@@ -90,7 +92,7 @@ async function SendUpdate(channels = [], sender = "user", ){
     }
 }
 
-module.exports.CreateCSNewsSchedule = CreateCSNewsSchedule;
-module.exports.SendUpdate = SendUpdate;
+module.exports.CreateCSNewsSchedule = CreateCRONSchedule;
+module.exports.SendUpdate = SendCSGOUpdate;
 module.exports.StartSchedule = StartSchedule;
 module.exports.StopSchedule = StopSchedule;
