@@ -37,11 +37,12 @@ Enter the `program` -directory and run these commands:
 npm install --save discord.js
 npm install --save request request-promise cheerio
 npm install --save node-cron
+npm install mysql
 ```
 
 or alternatively:
 ```
-npm install --save discord.js node-cron request request-promise cheerio
+npm install --save discord.js node-cron request request-promise cheerio mysql
 ```
 
 You should now be able to run the bot using
