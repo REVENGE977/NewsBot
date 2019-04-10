@@ -7,8 +7,8 @@ NewsBot is a Discord bot which crawls various game websites, such as the
 Whenever there is a new update article, it will send the article as a Discord message to all Discord channels 
 that are subscribed to that game's news schedule.
 
-**Purpose**: The purpose of this Discord bot is to automate sending updates about CS:GO to Discord servers. 
-This makes it easy to keep track of game updates.
+**Purpose**: The purpose of this Discord bot is to automate sending updates about various games to Discord servers. 
+This makes it easy to keep track of game updates without leaving the comfort of your Discord server.
 
 ## List of supported games
 **Left: Game name | Right: command**
