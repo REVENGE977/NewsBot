@@ -1,24 +1,28 @@
-# About CSGONewsBot
+# About NewsBot
 
-CSGONewsBot is a Discord bot which crawls the 
+NewsBot is a Discord bot which crawls various game websites, such as the
 [CS:GO updates](https://blog.counter-strike.net/index.php/category/updates/) 
--page and checks for new update articles every 2 hours.
+-page for CS:GO and checks for new update articles every 2 hours.
 
 Whenever there is a new update article, it will send the article as a Discord message to all Discord channels 
-that are subscribed to the bot's news schedule.
+that are subscribed to that game's news schedule.
 
 **Purpose**: The purpose of this Discord bot is to automate sending updates about CS:GO to Discord servers. 
 This makes it easy to keep track of game updates.
+
+## List of supported games
+**Left: Game name | Right: command**
+* CS:GO | csgo
 
 ## How to use the bot
 * Add this bot to your Discord server with 
 [this link](https://discordapp.com/api/oauth2/authorize?client_id=562687174697549856&permissions=522304&scope=bot).
 
-* Add the desired Discord text channel to the news schedule by writing the command `!addchannel`.
+* Add the desired Discord text channel and game to the news schedule by writing the command `!addchannel <game>`.
 
-* If you want to remove a Discord text channel from the news schedule, write the command `!removechannel`.
+* If you want to remove a game from the news schedule, write the command `!removechannel <game>`.
 
-* You can get the latest update article instantly by writing the command `!getupdate` on the desired Discord 
+* Get the latest update article instantly by writing the command `!getupdate <game>` on the desired Discord 
 text channel.
 
 ## Want to build your own version of this bot?
@@ -27,22 +31,17 @@ Copy this repository to the target directory and enter it.
 To be able to run this bot, you will have to install a few dependencies. 
 First, you will have to install Node.js. After installing Node.js, you should also have NPM installed.
 
-Next, while in the repository directory:
-
-Install required dependency:
+Enter the `program` -directory and run these commands:
 
 ```
 npm install --save discord.js
-```
-
-Install dependencies required by `Scraper.js`:
-```
 npm install --save request request-promise cheerio
+npm install --save node-cron
 ```
 
-Install dependencies required by `Scheduler.js` :
+or alternatively:
 ```
-npm install --save node-cron
+npm install --save discord.js node-cron request request-promise cheerio
 ```
 
 You should now be able to run the bot using
@@ -50,17 +49,17 @@ You should now be able to run the bot using
 node program/index.js
 ```
 
-Now that you have the code itself running, you need to create a new Discord bot. I'd recommend following 
+Now that you have the code itself works, you need to create a new Discord bot. I'd recommend following 
 [this](https://discordpy.readthedocs.io/en/rewrite/discord.html) guide by Discord.py.
 
-You need create a database to store the news articles and Discord channels in. 
+Next, create a database to store the news articles and Discord channels in. 
 You will also need to store your bot- and database credentials in a file called `private.js`.
 
 The tables should look like this:
 
 ```
-newsitems(title varchar(50) NOT NULL)
-channels(channelID varchar(50) NOT NULL)
+newsitems(game varchar(200) NOT NULL, title varchar(200) NOT NULL)
+channels(game varchar(200) NOT NULL, channelID varchar(25) NOT NULL)
 ```
 
 Your `private.js` should look like this:
