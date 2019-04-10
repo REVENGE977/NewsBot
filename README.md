@@ -37,7 +37,7 @@ Enter the `program` -directory and run these commands:
 npm install --save discord.js
 npm install --save request request-promise cheerio
 npm install --save node-cron
-npm install mysql
+npm install --save mysql
 ```
 
 or alternatively:
@@ -51,7 +51,7 @@ node program/index.js
 ```
 
 Now that the code itself works, you need to create a new Discord bot. I'd recommend following 
-[this](https://discordpy.readthedocs.io/en/rewrite/discord.html) guide by Discord.py.
+[this guide](https://discordpy.readthedocs.io/en/rewrite/discord.html) by Discord.py.
 
 Next, create a database to store the news articles and Discord channels in. 
 You will also need to store your bot- and database credentials in a file called `private.js`.
