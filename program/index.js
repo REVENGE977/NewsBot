@@ -101,7 +101,8 @@ function GetBotCommands(args) {
             messageBody = "\nCommand:      " + constants.BotCommands[command]["command"] + "\n";
             messageBody += "Description:    " + constants.BotCommands[command]["description"] + "\n\n";
             messageBody += "Syntax:             " + constants.BotCommands[command]["syntax"] + "\n";
-            messageBody += "Example:          " + constants.BotCommands[command]["example"] + "\n\n";
+            messageBody += "Example:          " + constants.BotCommands[command]["example"] + "\n";
+            messageBody += "Possible argument values:\n" + constants.BotCommands[command]["argvalues"] + "\n\n";
             messageBody += "If a command parameter includes a question mark (?), that parameter is optional.";
         } else {
             return new InvalidArguementsError();
