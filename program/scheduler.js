@@ -16,7 +16,6 @@ function CreateCRONSchedule(Timer){
         Timer, () => {
             console.log("News getter scheduled...");
             SendUpdate("csgo",[],"bot");
-            SendUpdate("forhonor", [], "bot");
         }, { scheduled: false, timezone: "Europe/Helsinki" });
 }
 
