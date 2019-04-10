@@ -1,6 +1,6 @@
-# About NewsBot
+# What is NewsBot?
 
-NewsBot is a Discord bot which crawls various game websites, such as the
+NewsBot is a Discord bot which crawls various game's websites, such as the
 [CS:GO updates](https://blog.counter-strike.net/index.php/category/updates/) 
 -page for CS:GO and checks for new update articles every 2 hours.
 
