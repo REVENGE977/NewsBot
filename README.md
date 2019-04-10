@@ -62,11 +62,16 @@ Now that the code itself works, you need to create a new Discord bot. I'd recomm
 Next, create a database to store the news articles and Discord channels in. 
 You will also need to store your bot- and database credentials in a file called `private.js`.
 
-The tables should look like this:
+Create the database:
+```
+CREATE DATABASE NewsBot;
+```
+
+Create the tables:
 
 ```
-newsitems(game varchar(200) NOT NULL, title varchar(200) NOT NULL)
-channels(game varchar(200) NOT NULL, channelID varchar(25) NOT NULL)
+CREATE TABLE NewsBot.newsitems(game varchar(200) NOT NULL, title varchar(200) NOT NULL);
+CREATE TABLE NewsBot.channels(game varchar(200) NOT NULL, channelID varchar(25) NOT NULL);
 ```
 
 Your `private.js` should look like this:
