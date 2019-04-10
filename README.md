@@ -49,7 +49,7 @@ You should now be able to run the bot using
 node program/index.js
 ```
 
-Now that you have the code itself works, you need to create a new Discord bot. I'd recommend following 
+Now that the code itself works, you need to create a new Discord bot. I'd recommend following 
 [this](https://discordpy.readthedocs.io/en/rewrite/discord.html) guide by Discord.py.
 
 Next, create a database to store the news articles and Discord channels in. 
