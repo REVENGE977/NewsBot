@@ -32,7 +32,7 @@ text channel.
   * Here's an installation guide for [Linux(fedora)](https://tecadmin.net/install-latest-nodejs-on-fedora/) | [Windows](https://www.guru99.com/download-install-node-js.html).
   
 * Enter the bot's target directory on command line or terminal.
-  * With Node.js installed, run this command to install depencencies:
+  * Enter the '`program`' -directory. With Node.js installed, run this command to install depencencies:
     ```
     npm install --save mysql discord.js node-cron request request-promise cheerio puppeteer
     ```
