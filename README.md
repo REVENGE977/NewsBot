@@ -90,7 +90,7 @@ text channel.
     * Remove the line you added and restart the bot.
 
 
-### Want to contribute to this repository?
+## Want to contribute to this repository?
 Any contributions are welcome! Currently, these are the main issues with this repo:
 * No proper error handling in places
 * Non-OOP sections of the codebase
