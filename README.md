@@ -75,20 +75,24 @@ text channel.
 * Using the command line or terminal, navigate to the target directory.
 
 
+
 **You should now be able to run the bot** using
 ```
 node program/index.js
 ```
+
+
 
 * Stop the bot and add the line `message.reply(message.author.id);` anywhere in Index.js after the line
     ```
     client.on("message", () => { 
     ```
 
-    Start the bot again and invite it to a Discord server and type anything in any channel. The bot will spew out numbers. Take the first number the bot responds with. That's your AdminID. Copy it, and in `private.js`, replace "AdminID placeholder" with the AdminID you just got.
+    * Start the bot again and invite it to a Discord server and type anything in any channel. The bot will spew out numbers. Take the first number the bot responds with. That's your AdminID. Copy it, and in `private.js`, replace "AdminID placeholder" with the AdminID you just got.
 
 
-The bot should now be fully functional.
+
+**The bot should now be fully functional.**
 
 
 ### Want to contribute to this repository?
