@@ -74,12 +74,10 @@ text channel.
 
 * Using the command line or terminal, navigate to the target directory.
 
-
-
-**You should now be able to run the bot** using
-```
-node program/index.js
-```
+  * **You should now be able to run the bot** using
+    ```
+    node program/index.js
+    ```
 
 
 
@@ -89,10 +87,7 @@ node program/index.js
     ```
 
     * Start the bot again and invite it to a Discord server and type anything in any channel. The bot will spew out numbers. Take the first number the bot responds with. That's your AdminID. Copy it, and in `private.js`, replace "AdminID placeholder" with the AdminID you just got.
-
-
-
-**The bot should now be fully functional.**
+    * Remove the line you added and restart the bot.
 
 
 ### Want to contribute to this repository?
