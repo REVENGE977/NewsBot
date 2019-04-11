@@ -33,6 +33,7 @@ text channel.
   
 * Enter the bot's target directory on command line or terminal.
   * Enter the '`program`' -directory. With Node.js installed, run this command to install depencencies:
+  
     ```
     npm install --save mysql discord.js node-cron request request-promise cheerio puppeteer
     ```
