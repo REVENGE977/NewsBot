@@ -17,7 +17,7 @@ function GetLatestNewsLink(){
     return new Promise((resolve, reject) => {
         rp(url).then((html) => {
             resolve($("h2 > a", html)[0].attribs.href);
-        }).catch((error) => { reject(error); });
+        }).catch((error) => { return reject(error); });
     });
 }
 
@@ -25,7 +25,7 @@ function GetNewsTitle(link){
     return new Promise((resolve, reject) => {
         rp(link).then((html) => {
             resolve($("h2 > a", html)[0].children[0].data);
-        }).catch((error) => { reject(error); })
+        }).catch((error) => { return reject(error); })
     });
 }
 function GetNewsBody(link){
@@ -52,7 +52,7 @@ function GetNewsBody(link){
             body += "\n";
 
             resolve(body);
-        }).catch((error) => { reject(error); })
+        }).catch((error) => { return reject(error); })
     });
 }
 
