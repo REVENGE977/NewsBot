@@ -30,6 +30,13 @@ text channel.
 
 * Clone this repository to the target directory and install Node.js.
   * Here's an installation guide for [Linux(fedora)](https://tecadmin.net/install-latest-nodejs-on-fedora/) | [Windows](https://www.guru99.com/download-install-node-js.html).
+  
+* Enter the bot's target directory on command line or terminal.
+  * With Node.js installed, run this command to install depencencies:
+    ```
+    npm install --save mysql discord.js node-cron request request-promise cheerio puppeteer
+    ```
+  
 
 * Install MySQL on your machine. Guide for [Linux(fedora)](https://tecadmin.net/install-mysql-8-on-fedora/) | 
 [Windows](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html).
