@@ -26,73 +26,70 @@ This makes it easy to keep track of game updates without leaving the comfort of 
 text channel.
 
 ## Want to build your own version of this bot?
-Copy this repository to the target directory and enter it.
+**Here's how.**
 
-To be able to run this bot, you will have to install a few dependencies. 
-First, you will have to install Node.js. After installing Node.js, you should also have NPM installed.
+* Clone this repository to the target directory and install Node.js.
+  * Here's an installation guide for [Linux(fedora)](https://tecadmin.net/install-latest-nodejs-on-fedora/) | [Windows](https://www.guru99.com/download-install-node-js.html).
 
-Enter the `program` -directory and run these commands:
+* Install MySQL on your machine. Guide for [Linux(fedora)](https://tecadmin.net/install-mysql-8-on-fedora/) | 
+[Windows](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html).
 
-```
-npm install --save discord.js
-npm install --save request request-promise cheerio
-npm install --save node-cron
-npm install --save mysql
-```
+* Create a MySQL database to store the news articles and Discord channels in. 
 
-or alternatively:
-```
-npm install --save discord.js node-cron request request-promise cheerio mysql
-```
+* Create the database:
+    ```
+    CREATE DATABASE NewsBot;
+    ```
 
-You should now be able to run the bot using
+* Create the tables:
+    ```
+    CREATE TABLE NewsBot.newsitems(game varchar(200) NOT NULL, title varchar(200) NOT NULL);
+    CREATE TABLE NewsBot.channels(game varchar(200) NOT NULL, channelID varchar(25) NOT NULL);
+    ```
+
+* Create a new Discord bot using [this guide](https://discordpy.readthedocs.io/en/rewrite/discord.html) by Discord.py.
+
+* Create a new file in the `program` -folder called `private.js`. Here, you will store your MySQL details, your bot's password and your AdminID.
+
+  * The file should look like this:
+  
+    ```
+    const host = "yourMySQLhost";
+    const user = "yourMySQLuser";
+    const password = "yourMySQLpassword";
+
+    const BotPass = "Bot password acquired earlier in Discord.Py guide";
+
+    const AdminID = "AdminID placeholder";
+
+    module.exports = {
+        host: host,
+        user: user,
+        password: password,
+        BotPass: BotPass,
+        AdminID: AdminID
+    };
+    ```
+
+
+* Using the command line or terminal, navigate to the target directory.
+
+
+**You should now be able to run the bot** using
 ```
 node program/index.js
 ```
-or
-```
-node index.js
-```
-while in the 'program' directory.
+
+* Stop the bot and add the line `message.reply(message.author.id);` anywhere in Index.js after the line
+    ```
+    client.on("message", () => { 
+    ```
+
+    Start the bot again and invite it to a Discord server and type anything in any channel. The bot will spew out numbers. Take the first number the bot responds with. That's your AdminID. Copy it, and in `private.js`, replace "AdminID placeholder" with the AdminID you just got.
 
 
-Now that the code itself works, you need to create a new Discord bot. I'd recommend following 
-[this guide](https://discordpy.readthedocs.io/en/rewrite/discord.html) by Discord.py.
+The bot should now be fully functional.
 
-Next, create a database to store the news articles and Discord channels in. 
-You will also need to store your bot- and database credentials in a file called `private.js`.
-
-Create the database:
-```
-CREATE DATABASE NewsBot;
-```
-
-Create the tables:
-
-```
-CREATE TABLE NewsBot.newsitems(game varchar(200) NOT NULL, title varchar(200) NOT NULL);
-CREATE TABLE NewsBot.channels(game varchar(200) NOT NULL, channelID varchar(25) NOT NULL);
-```
-
-Your `private.js` should look like this:
-
-```
-const host = "yourhost";
-const user = "youruser";
-const password = "yourpassword";
-
-const BotPass = "Bot password acquired earlier in Discord.Py guide";
-
-const AdminID = "Find your ID by adding 'message.reply(message.author.id);' somewhere in the index.js";
-
-module.exports = {
-    host: host,
-    user: user,
-    password: password,
-    BotPass: BotPass,
-    AdminID: AdminID
-};
-```
 
 ### Want to contribute to this repository?
 Any contributions are welcome! Currently, these are the main issues with this repo:
