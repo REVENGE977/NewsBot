@@ -10,7 +10,7 @@ async function GetNewestCSGOUpdate(){
         let body = await GetNewsBody(link);
 
         return [link,title,body];
-    } catch (error){ console.log(error); }
+    } catch (error){ throw new Error("Something went wrong while getting CS:GO update."); }
 }
 
 function GetLatestNewsLink(){

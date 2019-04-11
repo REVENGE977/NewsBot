@@ -55,7 +55,7 @@ async function SendUpdate(game, channels = [], sender = "user", ){
 
             image = "counter_strike_wallpaper.png";
 
-            scraperOutput = await GetNewestCSGOUpdate();
+            scraperOutput = await GetNewestCSGOUpdate().catch(error => { throw error; });
 
             link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
 
