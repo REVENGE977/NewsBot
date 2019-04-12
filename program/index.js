@@ -65,7 +65,8 @@ client.on("ready", () => {
                 if (!Validator.validateArguments([args[1]])){
                     return message.reply("Invalid arguments in command.");
                 }
-                message.reply("Getting update article, please wait...");
+                message.reply("Getting update article, please wait...")
+                    .then((msg) => msg.delete(3500));
                 Scheduler.SendUpdate(args[1],[message.channel.id])
                     .catch((error) => {
                         console.error(error);
