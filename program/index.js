@@ -129,10 +129,10 @@ function GetBotCommand(command){
         output += "Example:          " + command["example"] + "\n";
 
         if (command["argvalues"]) {
-            output += "Possible argument values:\n" + command["argvalues"] + "\n\n";
+            output += "Possible argument values:\n" + command["argvalues"] + "\n";
         }
 
-        output += "If a command parameter includes a question mark (?), that parameter is optional.";
+        output += "\nIf a command parameter includes a question mark (?), that parameter is optional.";
     } else {
         throw new InvalidArguementsError();
     }
