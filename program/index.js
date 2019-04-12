@@ -3,6 +3,7 @@ const client = new Discord.Client();
 
 const DatabaseCL = require('./database').Database;
 const Scheduler = require("./scheduler");
+const Validator = require('./validator').Validator;
 const InvalidArguementsError = require("./errors").InvalidArguementsError;
 const UnknownCommandError = require("./errors").UnknownCommandError;
 const UnauthorizedError = require("./errors").UnauthorizedError;
@@ -43,6 +44,9 @@ client.on("ready", () => {
                     .catch(error => { message.reply(error); });
                 break;
             case '!getupdate':
+                if (!Validator.validateArguments([args[1]])){
+                    return message.reply("Invalid arguments in command.");
+                }
                 message.reply("Getting update article, please wait...");
                 Scheduler.SendUpdate(args[1],[message.channel.id])
                     .catch((error) => {
