@@ -3,14 +3,11 @@ const $ = require('cheerio');
 const url = "https://blog.counter-strike.net/index.php/category/updates/";
 
 async function GetNewestCSGOUpdate(){
-    try {
+    let link = await GetLatestNewsLink();
+    let title = await GetNewsTitle(link);
+    let body = await GetNewsBody(link);
 
-        let link = await GetLatestNewsLink();
-        let title = await GetNewsTitle(link);
-        let body = await GetNewsBody(link);
-
-        return [link,title,body];
-    } catch (error){ throw new Error("Something went wrong while getting CS:GO update."); }
+    return [link,title,body];
 }
 
 function GetLatestNewsLink(){
