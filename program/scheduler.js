@@ -6,7 +6,7 @@ const Index = require('./index');
 
 const Database = new DatabaseCL();
 
-const CRONSchedule = CreateCRONSchedule("0 0 */2 * * *");
+const CRONSchedule = CreateCRONSchedule("0 */30 * * * *");
 
 function CreateCRONSchedule(Timer){
     if (!cron.validate(Timer)){  return console.log("Invalid cron timer."); }
