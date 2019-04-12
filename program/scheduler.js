@@ -4,8 +4,6 @@ const GetNewestCSGOUpdate = require("./scraper").GetNewestCSGOUpdate;
 const DatabaseCL = require("./database").Database;
 const Index = require('./index');
 
-const Errors = require('./errors');
-
 const Database = new DatabaseCL();
 
 const CRONSchedule = CreateCRONSchedule("0 0 */2 * * *");
@@ -76,7 +74,7 @@ async function SendUpdate(game, channels = [], sender = "user", ){
     }
 
     if (!scraperOutput || !channels){
-        throw new Errors.InvalidArguementsError();
+        throw new Error("Invalid arguments in command.");
     }
 
     body = body.replace(undefined, "");

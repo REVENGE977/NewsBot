@@ -4,8 +4,6 @@ const user = Private.user;
 const password = Private.password;
 const host = Private.host;
 
-const Errors = require('./errors');
-
 class Database {
     /* Create new connection pool upon construction */
     constructor(){
