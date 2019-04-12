@@ -50,7 +50,7 @@ class Database {
     }
     /* Remove Discord channel from DB */
     async RemoveChannel(game, channelID) {
-        if (!game || !channelID){ throw new Errors.InvalidArguementsError(); }
+        if (!game || !channelID){ throw new Error("Invalid arguments in command."); }
 
         let sql = "DELETE FROM NewsBot.channels WHERE game = ? && channelID = ?";
         let args = [game,channelID];
