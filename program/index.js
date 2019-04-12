@@ -30,12 +30,17 @@ client.on("ready", () => {
 
         switch (command = args[0]){
             case '!help':
-                if (!Validator.validateArguments([args[1]])){
-                    commandResponse = GetBotCommands();
-                } else {
-                    commandResponse = GetBotCommand(args[1]);
+                try {
+                    if (!Validator.validateArguments([args[1]])){
+                        commandResponse = GetBotCommands();
+                    } else {
+                        commandResponse = GetBotCommand(args[1]);
+                    }
+                    message.reply(commandResponse);
+                } catch (error) {
+                    console.error(error);
+                    message.reply("Something went wrong while getting commands.");
                 }
-                message.reply(commandResponse.message ? commandResponse.message : commandResponse.error);
                 break;
             case '!addchannel':
                 if (!Validator.validateArguments([args[1], message.channel.id])){
@@ -114,13 +119,19 @@ function GetBotCommand(command){
     /* Remove exclamation mark */
     if (command.indexOf("!") === 0) { command = command.substr(1); }
 
+    command = constants.BotCommands[command];
+
     /* If command exists.. */
-    if (constants.BotCommands[command]) {
-        output += "\nCommand:      " + constants.BotCommands[command]["command"] + "\n";
-        output += "Description:    " + constants.BotCommands[command]["description"] + "\n\n";
-        output += "Syntax:             " + constants.BotCommands[command]["syntax"] + "\n";
-        output += "Example:          " + constants.BotCommands[command]["example"] + "\n";
-        output += "Possible argument values:\n" + constants.BotCommands[command]["argvalues"] + "\n\n";
+    if (command) {
+        output += "\nCommand:      " + command["command"] + "\n";
+        output += "Description:    " + command["description"] + "\n\n";
+        output += "Syntax:             " + command["syntax"] + "\n";
+        output += "Example:          " + command["example"] + "\n";
+
+        if (command["argvalues"]) {
+            output += "Possible argument values:\n" + command["argvalues"] + "\n\n";
+        }
+
         output += "If a command parameter includes a question mark (?), that parameter is optional.";
     } else {
         throw new InvalidArguementsError();
