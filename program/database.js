@@ -59,7 +59,7 @@ class Database {
     }
     /* Get all stored Discord channels from DB */
     async GetChannels(game){
-        if (!game){ return new Errors.InvalidArguementsError().error; }
+        if (!game){ throw new Error("Invalid arguments in command."); }
 
         let sql = "SELECT (channelID) FROM NewsBot.channels where game = ?";
         let args = [game];
