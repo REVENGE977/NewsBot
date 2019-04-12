@@ -21,23 +21,19 @@ function CreateCRONSchedule(Timer){
 
 /* Starts Cron Schedule */
 function StartSchedule(){
-    let output = {};
     console.log("Starting cron schedule...");
     if (CRONSchedule){
         CRONSchedule.start();
-        output.message = "Cron schedule started successfully!";
-    }  else { output.error = "Failed to start cron schedule." }
-    return output;
+        return "Cron schedule started successfully!";
+    }  else { throw new Error("Failed to start CRON schedule."); }
 }
 /* Stops Cron schedule */
 function StopSchedule(){
-    let output = {};
     console.log("Stopping cron schedule...");
     if (CRONSchedule){
         CRONSchedule.stop();
-        output.message = "Cron schedule stopped successfully.";
-    } else { output.error = "Failed to stop cron schedule." }
-    return output;
+        return "Cron schedule stopped successfully.";
+    } else { throw new Error("Failed to stop CRON schedule."); }
 }
 
 async function SendUpdate(game, channels = [], sender = "user", ){

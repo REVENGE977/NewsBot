@@ -77,20 +77,30 @@ client.on("ready", () => {
                 break;
             case '!schedulestart':
                 if (message.author.id === AdminID){
-                    commandResponse = Scheduler.StartSchedule();
-                    message.reply(commandResponse.message ? commandResponse.message : commandResponse.error);
-                } else { message.reply(new UnauthorizedError().error); }
+                    try {
+                        commandResponse = Scheduler.StartSchedule();
+                        message.reply(commandResponse);
+                    } catch (error) {
+                        console.error(error);
+                        message.reply("Something went wrong while starting CRON schedule.");
+                    }
+                } else { message.reply("You're not authorized to use this command."); }
                 break;
             case '!schedulestop':
                 if (message.author.id === AdminID){
-                    commandResponse = Scheduler.StopSchedule();
-                    message.reply(commandResponse.message ? commandResponse.message : commandResponse.error);
-                } else { message.reply(new UnauthorizedError().error); }
+                    try {
+                        commandResponse = Scheduler.StopSchedule();
+                        message.reply(commandResponse);
+                    } catch (error) {
+                        console.error(error);
+                        message.reply("Something went wrong while stopping CRON schedule.");
+                    }
+                } else { message.reply("You're not authorized to use this command."); }
                 break;
             default:
                 /* Invalid command entered */
                 if (command.startsWith("!")){
-                    message.reply(new UnknownCommandError(command).error + "\nIf you need help, type \"!help\"");
+                    message.reply("Unknown command: " + command + "\nIf you need help, type \"!help\"");
                 }
                 break;
         }
