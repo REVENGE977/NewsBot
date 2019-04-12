@@ -55,7 +55,7 @@ async function SendUpdate(game, channels = [], sender = "user", ){
 
             image = "counter_strike_wallpaper.png";
 
-            scraperOutput = await GetNewestCSGOUpdate().catch(error => { throw error; });
+            scraperOutput = await GetNewestCSGOUpdate();
 
             link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
 
@@ -76,12 +76,11 @@ async function SendUpdate(game, channels = [], sender = "user", ){
 
             break;
         default:
-            console.log("Invalid game: " + game);
-            return "Invalid game: " + game;
+            throw new Error("Invalid game: " + game);
     }
 
     if (!scraperOutput || !channels){
-        let error = new Errors.InvalidArguementsError().error; console.log(error); return error;
+        throw new Errors.InvalidArguementsError();
     }
 
     body = body.replace(undefined, "");
@@ -105,8 +104,7 @@ async function SendUpdate(game, channels = [], sender = "user", ){
 
     if (sender === "bot"){
         if (!await Database.AddNewsArticle(game,title)){
-            console.log("Error while adding news article to DB!");
-            return "Error while adding news article to DB!";
+            return console.log("Error while adding news article to DB!");
         }
     }
 }
