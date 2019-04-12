@@ -22,11 +22,19 @@ client.on("ready", () => {
     client.on("message", (message) => {
 
         /* Split command by space */
-        let args = message.toString().split(" ");
+        let args = message.toString().split(" "), command = args[0], commandResponse;
 
-        let command, commandResponse;
+        // Ignore non-commands
+        if (!command.startsWith("!")){ return; }
 
-        switch (command = args[0]){
+        try {
+            command = new Command(command);
+        } catch (error) {
+            console.error(error);
+            return message.reply("Unknown command: " + command + "\nIf you need help, type \"!help\"")
+        }
+
+        switch (command.command){
             case '!help':
                 try {
                     if (!Validator.validateArguments([args[1]])){
@@ -101,7 +109,7 @@ client.on("ready", () => {
                 break;
             default:
                 /* Invalid command entered */
-                if (command.startsWith("!")){
+                if (command.command.startsWith("!")){
                     message.reply("Unknown command: " + command + "\nIf you need help, type \"!help\"");
                 }
                 break;
@@ -126,30 +134,63 @@ function GetBotCommands() {
     return output;
 }
 function GetBotCommand(command){
-    let output = "";
 
-    /* Remove exclamation mark */
-    if (command.indexOf("!") === 0) { command = command.substr(1); }
-
-    command = constants.BotCommands[command];
+    try {
+        command = new Command(command);
+    } catch (error) { throw new Error("Invalid arguments in command."); }
 
     /* If command exists.. */
-    if (command) {
-        output += "\nCommand:      " + command["command"] + "\n";
-        output += "Description:    " + command["description"] + "\n\n";
-        output += "Syntax:             " + command["syntax"] + "\n";
-        output += "Example:          " + command["example"] + "\n";
-
-        if (command["argvalues"]) {
-            output += "Possible argument values:\n" + command["argvalues"] + "\n";
-        }
-
-        output += "\nIf a command parameter includes a question mark (?), that parameter is optional.";
+    if (constants.BotCommands[command.name]) {
+        let commandDescription = new CommandDescription(command);
+        return commandDescription.description;
     } else {
         throw new Error("Invalid arguments in command.");
     }
+}
 
-    return output;
+class Command {
+    constructor(command){
+        if (!command) { throw new Error("Invalid command: " + command); }
+
+        /* Remove exclamation mark */
+        if (command.indexOf("!") === 0) { command = command.substr(1); }
+
+        command = constants.BotCommands[command];
+
+        this.name = command["name"];
+        this.command = command["command"];
+        this.description = command["description"];
+        this.syntax = command["syntax"];
+        this.example = command["example"];
+        this.endText = "If a command parameter includes a question mark (?), that parameter is optional.";
+
+        if (command["argvalues"]){
+            this.argvalues = command["argvalues"];
+        }
+    }
+}
+
+class CommandDescription {
+    constructor(command){
+        this.command = command;
+        this.description = this.GetCommandDescription();
+    }
+
+    GetCommandDescription(){
+        let output = "\n";
+        output += "Name:                 " + this.command.name + "\n";
+        output += "Command:         " + this.command.command + "\n";
+        output += "Description:       " + this.command.description + "\n\n";
+        output += "Syntax:                " + this.command.syntax + "\n";
+        output += "Example:             " + this.command.example + "\n";
+
+        if (this.command.argvalues){
+            output += "\nAllowed argument values: " + this.command.argvalues + "\n";
+        }
+
+        output += "\n" + this.command.endText;
+        return output;
+    }
 }
 
 module.exports.SendMessage = SendMessage;

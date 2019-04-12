@@ -1,37 +1,40 @@
 const BotCommands = {
     "help":{
+        "name":"help",
         "command":"!help",
         "description":
-            "Show useful information about a command " +
-            "or show list of commands.",
-        "syntax":"!help ?<subject>",
+            "Show useful information about a command or show list of commands.",
+        "syntax":"!help ?<command>",
         "example":"!help getupdate"
     },
     "addchannel":{
+        "name":"addchannel",
         "command":"!addchannel",
         "description":
-            "Adds current channel to subscription list of regular update articles for the given game.",
+            "Adds current channel to update article schedule for the given game.",
         "syntax":"!addchannel <game>",
         "example":"!addchannel csgo",
         "argvalues":"csgo"
     },
     "removechannel":{
+        "name":"removechannel",
         "command":"!removechannel",
         "description":
-            "Removes current channel from subscription list of regular update articles for the given game.",
+            "Removes current channel from update article schedule for the given game.",
         "syntax":"!removechannel <game>",
         "example":"!removechannel csgo",
         "argvalues":"csgo"
     },
     "getupdate":{
+        "name":"getupdate",
         "command":"!getupdate",
         "description":
-            "Sends the latest update article for the given game to the " +
-            "channel where this command gets called.",
+            "Sends the latest update article for the given game.",
         "syntax":"!getupdate <game>",
         "example":"!getupdate csgo"
     },
     "schedulestart":{
+        "name":"schedulestart",
         "command":"!schedulestart",
         "description":
             "Starts update schedule. Only available to admin.",
@@ -39,6 +42,7 @@ const BotCommands = {
         "example":"!schedulestart"
     },
     "schedulestop":{
+        "name":"schedulestop",
         "command":"!schedulestop",
         "description":
             "Stops update schedule. Only available to admin.",
