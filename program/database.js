@@ -40,20 +40,19 @@ class Database {
         let result = await this.query(sql, args);
 
         if (result[0].count === 0) {
-            sql = "INSERT INTO NewsBot.channels (game,channelID) VALUES (?,?)";
+            sql = "INSERT INTO NewsBot.channels (g<ame,channelID) VALUES (?,?)";
             await this.query(sql, args);
             return "Channel successfully added!";
         } else { return "Channel already added!" }
     }
     /* Remove Discord channel from DB */
     async RemoveChannel(game, channelID) {
-        if (!game || !channelID){ return new Errors.InvalidArguementsError().error; }
+        if (!game || !channelID){ throw new Errors.InvalidArguementsError(); }
 
         let sql = "DELETE FROM NewsBot.channels WHERE game = ? && channelID = ?";
         let args = [game,channelID];
 
         await this.query(sql, args);
-        return "Channel successfully removed.";
     }
     /* Get all stored Discord channels from DB */
     async GetChannels(game){
