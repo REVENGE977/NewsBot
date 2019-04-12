@@ -19,4 +19,6 @@ async function GetNewestCSGOUpdate(){
     return [scraper.link, scraper.title, scraper.body];
 }
 
-module.exports.GetNewestCSGOUpdate = GetNewestCSGOUpdate;
+module.exports = {
+    GetNewestCSGOUpdate: GetNewestCSGOUpdate
+};
