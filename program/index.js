@@ -4,9 +4,6 @@ const client = new Discord.Client();
 const DatabaseCL = require('./database').Database;
 const Scheduler = require("./scheduler");
 const Validator = require('./validator').Validator;
-const InvalidArguementsError = require("./errors").InvalidArguementsError;
-const UnknownCommandError = require("./errors").UnknownCommandError;
-const UnauthorizedError = require("./errors").UnauthorizedError;
 const constants = require("./constants");
 
 const Private = require('./private');
@@ -144,7 +141,7 @@ function GetBotCommand(command){
 
         output += "\nIf a command parameter includes a question mark (?), that parameter is optional.";
     } else {
-        throw new InvalidArguementsError();
+        throw new Error("Invalid arguments in command.");
     }
 
     return output;
