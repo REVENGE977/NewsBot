@@ -92,10 +92,14 @@ async function SendUpdate(game, channels = [], sender = "user", ){
     }
 
     channels.forEach((channel) => {
-        Index.SendMessage(
-            channel,
-            messageTitle + body, { embed }
-        );
+        try {
+            Index.SendMessage(
+                channel,
+                messageTitle + body, { embed }
+            );
+        } catch (error) {
+            console.error(error);
+        }
     });
 
     if (sender === "bot"){
