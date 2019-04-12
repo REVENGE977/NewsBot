@@ -1,17 +1,14 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const DatabaseCL = require('./database').Database;
-const SchedulerCL = require("./scheduler").Scheduler;
-const Validator = require('./validator').Validator;
-const constants = require("./constants");
+const Command = require('./misc/classes').Command;
+
+const Commands = require('./commands').Commands;
+
 
 const Private = require('./private');
 const BotPass = Private.BotPass;
 const AdminID = Private.AdminID;
-
-const Database = new DatabaseCL();
-const Scheduler = new SchedulerCL();
 
 client.login(BotPass);
 
@@ -22,18 +19,33 @@ client.on("ready", () => {
     client.on("message", (message) => {
 
         /* Split command by space */
-        let args = message.toString().split(" "), command = args[0], commandResponse;
+        let args = message.toString().split(" "), command = args[0];
 
-        // Ignore non-commands
+        /* Remove 'command' from args */
+        args.splice(0,1);
+
+        /* Ignore non-commands */
         if (!command.startsWith("!")){ return; }
 
+        /* Remove exclamation mark */
+        command = command.substr(1);
+
         try {
-            command = new Command(command);
+            command = Commands[command];
         } catch (error) {
             console.error(error);
             return message.reply("Unknown command: " + command + "\nIf you need help, type \"!help\"")
         }
 
+        if (command.requireAdmin){
+            if (message.author.id !== AdminID){
+                return message.reply("Admin privileges are required to run \"" + command.name + "\".");
+            }
+        }
+
+        command.run(message, args);
+
+        /*
         switch (command.command){
             case '!help':
                 try {
@@ -108,12 +120,12 @@ client.on("ready", () => {
                 } else { message.reply("You're not authorized to use this command."); }
                 break;
             default:
-                /* Invalid command entered */
+                /* Invalid command entered *//*
                 if (command.command.startsWith("!")){
                     message.reply("Unknown command: " + command + "\nIf you need help, type \"!help\"");
                 }
                 break;
-        }
+        }*/
     });
 });
 
@@ -122,75 +134,6 @@ function SendMessage(channel, message, embed = false){
     else { client.channels.get(channel).send(message); }
 }
 
-function GetBotCommands() {
-    let output = "";
-
-    output += "To learn more about a command, type \"!help <command>\".\n";
-    output += "Here are all of my commands:\n\n";
-    for (let key in constants.BotCommands) {
-        output += constants.BotCommands[key]["command"] + "\n";
-    }
-
-    return output;
-}
-function GetBotCommand(command){
-
-    try {
-        command = new Command(command);
-    } catch (error) { throw new Error("Invalid arguments in command."); }
-
-    /* If command exists.. */
-    if (constants.BotCommands[command.name]) {
-        let commandDescription = new CommandDescription(command);
-        return commandDescription.description;
-    } else {
-        throw new Error("Invalid arguments in command.");
-    }
-}
-
-class Command {
-    constructor(command){
-        if (!command) { throw new Error("Invalid command: " + command); }
-
-        /* Remove exclamation mark */
-        if (command.indexOf("!") === 0) { command = command.substr(1); }
-
-        command = constants.BotCommands[command];
-
-        this.name = command["name"];
-        this.command = command["command"];
-        this.description = command["description"];
-        this.syntax = command["syntax"];
-        this.example = command["example"];
-        this.endText = "If a command parameter includes a question mark (?), that parameter is optional.";
-
-        if (command["argvalues"]){
-            this.argvalues = command["argvalues"];
-        }
-    }
-}
-
-class CommandDescription {
-    constructor(command){
-        this.command = command;
-        this.description = this.GetCommandDescription();
-    }
-
-    GetCommandDescription(){
-        let output = "\n";
-        output += "Name:                 " + this.command.name + "\n";
-        output += "Command:         " + this.command.command + "\n";
-        output += "Description:       " + this.command.description + "\n\n";
-        output += "Syntax:                " + this.command.syntax + "\n";
-        output += "Example:             " + this.command.example + "\n";
-
-        if (this.command.argvalues){
-            output += "\nAllowed argument values: " + this.command.argvalues + "\n";
-        }
-
-        output += "\n" + this.command.endText;
-        return output;
-    }
-}
-
-module.exports.SendMessage = SendMessage;
+module.exports = {
+    SendMessage: SendMessage
+};

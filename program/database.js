@@ -29,7 +29,7 @@ class Database {
         });
     }
     /* Add new Discord channel to DB */
-    async AddChannel(game, channelID){
+    async AddGame(game, channelID){
         if (!game || !channelID){ throw new Error("Invalid arguments in command."); }
 
         let sql = "SELECT COUNT(*) as count FROM NewsBot.channels WHERE game = ? && channelID = ?";
@@ -47,7 +47,7 @@ class Database {
         return false;
     }
     /* Remove Discord channel from DB */
-    async RemoveChannel(game, channelID) {
+    async RemoveGame(game, channelID) {
         if (!game || !channelID){ throw new Error("Invalid arguments in command."); }
 
         let sql = "DELETE FROM NewsBot.channels WHERE game = ? && channelID = ?";
