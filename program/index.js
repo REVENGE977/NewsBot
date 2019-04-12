@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const DatabaseCL = require('./database').Database;
-const Scheduler = require("./scheduler");
+const SchedulerCL = require("./scheduler").Scheduler;
 const Validator = require('./validator').Validator;
 const constants = require("./constants");
 
@@ -11,6 +11,7 @@ const BotPass = Private.BotPass;
 const AdminID = Private.AdminID;
 
 const Database = new DatabaseCL();
+const Scheduler = new SchedulerCL();
 
 client.login(BotPass);
 
