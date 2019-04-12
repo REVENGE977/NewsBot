@@ -44,7 +44,10 @@ client.on("ready", () => {
                     return message.reply("Invalid arguments in command.");
                 }
                 Database.AddChannel(args[1], message.channel.id)
-                    .then(() => { message.reply("Channel successfully added!"); })
+                    .then((result) => {
+                        if (result) { message.reply("Channel successfully added!"); }
+                        else { message.reply("Channel has already been added.");  }
+                    })
                     .catch(error => {
                         console.error(error);
                         message.reply("Something went wrong while adding channel.");

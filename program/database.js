@@ -32,7 +32,7 @@ class Database {
     }
     /* Add new Discord channel to DB */
     async AddChannel(game, channelID){
-        if (!game || !channelID){ return (new Errors.InvalidArguementsError()).error; }
+        if (!game || !channelID){ throw new Error("Invalid arguments in command."); }
 
         let sql = "SELECT COUNT(*) as count FROM NewsBot.channels WHERE game = ? && channelID = ?";
         let args = [game,channelID];
@@ -40,10 +40,13 @@ class Database {
         let result = await this.query(sql, args);
 
         if (result[0].count === 0) {
-            sql = "INSERT INTO NewsBot.channels (g<ame,channelID) VALUES (?,?)";
+            sql = "INSERT INTO NewsBot.channels (game,channelID) VALUES (?,?)";
             await this.query(sql, args);
-            return "Channel successfully added!";
-        } else { return "Channel already added!" }
+
+            return true;
+        }
+
+        return false;
     }
     /* Remove Discord channel from DB */
     async RemoveChannel(game, channelID) {
