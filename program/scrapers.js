@@ -1,35 +1,32 @@
 const rp = require('request-promise');
 const $ = require('cheerio');
-const CSGOUrl = "https://blog.counter-strike.net/index.php/category/updates/";
 
-async function GetNewestCSGOUpdate(){
-    let link = await CSGO.GetNewsLink();
-    let title = await CSGO.GetNewsTitle(link);
-    let body = await CSGO.GetNewsBody(link);
+class CSGOScraper {
+    constructor(){
+        this.url = "https://blog.counter-strike.net/index.php/category/updates/";
+    }
 
-    return [link,title,body];
-}
-
-class CSGO {
-    static GetNewsLink(){
+    GetNewsLink(){
         return new Promise((resolve, reject) => {
-            rp(CSGOUrl).then((html) => {
-                resolve($("h2 > a", html)[0].attribs.href);
+            rp(this.url).then((html) => {
+                this.link = $("h2 > a", html)[0].attribs.href;
+                resolve();
             }).catch((error) => { return reject(error); });
         });
     }
 
-    static GetNewsTitle(link){
+    GetNewsTitle(){
         return new Promise((resolve, reject) => {
-            rp(link).then((html) => {
-                resolve($("h2 > a", html)[0].children[0].data);
+            rp(this.link).then((html) => {
+                this.title = $("h2 > a", html)[0].children[0].data;
+                resolve();
             }).catch((error) => { return reject(error); })
         });
     }
-    static GetNewsBody(link){
+    GetNewsBody(){
         return new Promise((resolve, reject) => {
             let output = [];
-            rp(link).then((html) => {
+            rp(this.link).then((html) => {
 
                 let childCount = $("div.inner_post p", html).length;
                 for (let i = 1; i < childCount; i++){
@@ -42,17 +39,20 @@ class CSGO {
                     }
                 }
 
-                let body = undefined;
+                let body = "";
                 output.forEach((line) => {
                     body += line;
                     if (!line.endsWith("\n")){ body += "\n"; }
                 });
                 body += "\n";
 
-                resolve(body);
+                this.body = body;
+                resolve();
             }).catch((error) => { return reject(error); })
         });
     }
 }
 
-module.exports.GetNewestCSGOUpdate = GetNewestCSGOUpdate;
+module.exports = {
+    CSGOScraper: CSGOScraper
+};

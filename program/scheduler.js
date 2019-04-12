@@ -1,6 +1,6 @@
 const cron = require('node-cron');
 const Discord = require('discord.js');
-const GetNewestCSGOUpdate = require("./scraper").GetNewestCSGOUpdate;
+const GetNewestCSGOUpdate = require("./scraperhandler").GetNewestCSGOUpdate;
 const DatabaseCL = require("./database").Database;
 const Index = require('./index');
 
