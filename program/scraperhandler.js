@@ -1,6 +1,6 @@
 const Scrapers = require('./scrapers');
 
-async function GetNewestCSGOUpdate(){
+async function GetCSGOUpdate(){
     const scraper = new Scrapers.CSGOScraper();
 
     await scraper.GetNewsLink();
@@ -20,5 +20,5 @@ async function GetNewestCSGOUpdate(){
 }
 
 module.exports = {
-    GetNewestCSGOUpdate: GetNewestCSGOUpdate
+    GetCSGOUpdate: GetCSGOUpdate
 };
