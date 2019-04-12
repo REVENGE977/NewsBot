@@ -74,9 +74,7 @@ class Database {
     }
     /* Check if news article has already been shown */
     async NewsArticleExists(game, title){
-
         let sql = "SELECT COUNT(*) as count FROM NewsBot.newsitems WHERE game = ? && title = ?";
-
         let args = [game,title];
 
         let result = await this.query(sql, args);
