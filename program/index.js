@@ -45,8 +45,8 @@ client.on("ready", () => {
             case '!getupdate':
                 message.reply("Getting update article, please wait...").then((msg => msg.delete(7000)));
                 Scheduler.SendUpdate(args[1],[message.channel.id])
-                    .then(response => { message.reply(response); })
-                    .catch(error => { message.reply(error.message); });
+                    .then((response) => { message.reply(response); })
+                    .catch(() => { message.reply("Something went wrong while getting update."); });
                 break;
             case '!schedulestart':
                 if (message.author.id === AdminID){
