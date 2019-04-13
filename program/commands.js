@@ -1,7 +1,16 @@
 const Validator = require('./validator').Validator;
 const DatabaseCL = require('./database').Database;
+const SchedulerCL = require('./scheduler').Scheduler;
+
+const Database = new DatabaseCL();
+const Scheduler = new SchedulerCL();
 
 const GetCommandDescription = require('./misc/functions').GetCommandDescription;
+
+const SupportedGames = [
+    "csgo"
+];
+
 
 const Commands = {
     help: {
@@ -11,6 +20,9 @@ const Commands = {
         description: "Show useful information about a command or show list of commands.",
         syntax: "!help ?<command>",
         example: "!help getupdate",
+        argvalues: [
+
+        ],
         run: function (message, args) {
             let response;
 
@@ -43,13 +55,12 @@ const Commands = {
         syntax: "!addgame <game>",
         example: "!addgame csgo",
         argvalues: [
-            "csgo"
+            SupportedGames
         ],
         run: function(message, args){
             if (!Validator.validateArguments([args[0], message.channel.id])){
                 return message.reply("Invalid arguments in command.");
             }
-            const Database = new DatabaseCL();
             Database.AddGame(args[0], message.channel.id)
                 .then((result) => {
                     if (result) { return message.reply("Game successfully added!"); }
@@ -62,19 +73,19 @@ const Commands = {
         }
     },
     removegame: {
+        requireAdmin: false,
         name: "removegame",
         command: "!removegame",
         description: "Removes current channel from update article schedule for the given game.",
         syntax: "!removegame <game>",
         example: "!removegame csgo",
         argvalues: [
-            "csgo"
+            SupportedGames
         ],
         run: function(message, args){
             if (!Validator.validateArguments([args[0], message.channel.id])){
                 return message.reply("Invalid arguments in command.");
             }
-            const Database = new DatabaseCL();
             Database.RemoveGame(args[0], message.channel.id)
                 .then(() => { return message.reply("Game successfully removed."); })
                 .catch((error) => {
@@ -84,18 +95,68 @@ const Commands = {
         }
     },
     getupdate: {
+        requireAdmin: false,
         name: "getupdate",
         command: "!getupdate",
         description: "Sends the latest update article for the given game to current channel.",
         syntax: "!getupdate <game>",
         example: "!getupdate csgo",
         argvalues: [
-            "csgo"
+            SupportedGames
         ],
         run: function(message, args){
-
+            if (!Validator.validateArguments([args[0]])){
+                return message.reply("Invalid arguments in command.");
+            }
+            message.reply("Getting update article, please wait...")
+                .then((msg) => msg.delete(3500));
+            Scheduler.SendUpdate(args[0],[message.channel.id])
+                .catch((error) => {
+                    console.error(error);
+                    message.reply("Something went wrong while getting update.");
+                });
         }
     },
+    schedulestart: {
+        requireAdmin: true,
+        name: "schedulestart",
+        command:" !schedulestart",
+        description: "Starts update schedule. Only available to admin.",
+        syntax: "!schedulestart",
+        example: "!schedulestart",
+        argvalues: [
+
+        ],
+        run: function(message, args){
+            try {
+                let response = Scheduler.StartSchedule();
+                message.reply(response);
+            } catch (error) {
+                console.error(error);
+                message.reply("Something went wrong while starting CRON schedule.");
+            }
+        }
+    },
+    schedulestop: {
+        requireAdmin: true,
+        name: "schedulestop",
+        command: "!schedulestop",
+        description: "Stops update schedule. Only available to admin.",
+        syntax: "!schedulestop",
+        example: "!schedulestop",
+        argvalues: [
+
+        ],
+        run: function(message, args){
+            try {
+                let response = Scheduler.StopSchedule();
+                message.reply(response);
+            } catch (error) {
+                console.error(error);
+                message.reply("Something went wrong while stopping CRON schedule.");
+            }
+        }
+    }
 };
 
 

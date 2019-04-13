@@ -2,7 +2,6 @@ const cron = require('node-cron');
 const Discord = require('discord.js');
 const GetNewestCSGOUpdate = require("./scraperhandler").GetCSGOUpdate;
 const DatabaseCL = require("./database").Database;
-const Index = require('./index');
 
 class Scheduler {
     constructor(Timer = "0 */30 * * * *"){
@@ -83,21 +82,18 @@ class Scheduler {
                 .setImage("attachment://" + image);
         }
 
-        channels.forEach((channel) => {
-            try {
-                Index.SendMessage(
-                    channel,
-                    messageTitle + body, { embed }
-                );
-            } catch (error) {
-                console.error(error);
-            }
-        });
-
         if (sender === "bot"){
             if (!await this.Database.AddNewsArticle(game,title)){
                 return console.log("Error while adding news article to DB!");
             }
+        }
+
+        return {
+            name: "sendupdate",
+            channels: channels,
+            messageTitle: messageTitle,
+            body: body,
+            embed: embed
         }
     }
 }

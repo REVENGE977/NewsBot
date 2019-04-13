@@ -1,10 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const Command = require('./misc/classes').Command;
-
 const Commands = require('./commands').Commands;
-
 
 const Private = require('./private');
 const BotPass = Private.BotPass;
@@ -43,7 +40,20 @@ client.on("ready", () => {
             }
         }
 
-        command.run(message, args);
+        let result = command.run(message, args);
+
+        if (result.name === "sendupdate"){
+            result.channels.forEach((channel) => {
+                let embed = result.embed;
+                try {
+                    let channel = client.channels.get(channel);
+                    if (embed){ channel.send(result.messageTitle + result.body, { embed }); }
+                    else { channel.send(result.messageTitle + result.body); }
+                } catch (error){
+                    console.error(error);
+                }
+            })
+        }
 
         /*
         switch (command.command){
