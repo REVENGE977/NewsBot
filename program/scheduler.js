@@ -69,7 +69,7 @@ class Scheduler {
 
                 link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
 
-                messageTitle = "__**Latest OSRS news**__\n\n";
+                messageTitle = "__**Latest OSRS news:**__\n\n";
 
                 if (sender === "bot"){
                     messageTitle = "__**New OSRS update release!**__\n\n";
