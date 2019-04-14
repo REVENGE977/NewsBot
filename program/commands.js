@@ -85,20 +85,20 @@ const Commands = {
             return "Game successfully removed.";
         }
     },
-    getupdate: {
+    news: {
         requireAdmin: false,
-        name: "getupdate",
-        command: "!getupdate",
-        description: "Sends the latest update article for the given game to current channel.",
-        syntax: "!getupdate <game>",
-        example: "!getupdate csgo",
+        name: "news",
+        command: "!news",
+        description: "Sends the latest news article for the given game to current channel.",
+        syntax: "!news <game>",
+        example: "!news csgo",
         argvalues: SupportedGames,
         run: async function(message, args){
             if (!Validator.validateArguments([args[0]])){
                 throw new Error("Invalid arguments in command.");
             }
-            message.reply("Getting update article, please wait...").then((msg) => msg.delete(3500));
-            return await Scheduler.SendUpdate(args[0],[message.channel.id]);
+            message.reply("Getting news article, please wait...").then((msg) => msg.delete(3500));
+            return await Scheduler.SendNewsArticle(args[0],[message.channel.id]);
         }
     },
     schedulestart: {

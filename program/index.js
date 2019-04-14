@@ -123,7 +123,7 @@ client.on("ready", () => {
                 }
                 message.reply("Getting update article, please wait...")
                     .then((msg) => msg.delete(3500));
-                Scheduler.SendUpdate(args[1],[message.channel.id])
+                Scheduler.SendNewsArticle(args[1],[message.channel.id])
                     .catch((error) => {
                         console.error(error);
                         message.reply("Something went wrong while getting update.");
