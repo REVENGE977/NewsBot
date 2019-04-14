@@ -68,14 +68,15 @@ class Scheduler {
 
                 link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
 
-                messageTitle = "__**Latest OSRS update:**__\n\n";
+                messageTitle = "__**Latest OSRS update**__\n\n";
 
                 if (sender === "bot"){
                     messageTitle = "__**New OSRS update release!**__\n\n";
                     if (await this.Database.NewsArticleExists(game,title)){ return console.log("Old article"); }
                 }
 
-                messageTitle += "*Update highlights*: \n\n";
+                messageTitle += "__**Update topics**__: \n\n";
+
                 break;
             default:
                 throw new Error("Invalid game: " + game);

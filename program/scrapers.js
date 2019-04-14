@@ -87,6 +87,8 @@ class OSRSScraper {
             let output = [];
             rp(this.link).then((html) => {
 
+                this.body = "";
+
                 let articleHolderChildren = $(".osrsArticleContentText", html)[0].children;
 
                 articleHolderChildren.forEach((child) => {
@@ -97,10 +99,7 @@ class OSRSScraper {
                                     if (child.type === "text"){
                                         if (child.data !== "\n"){
                                             let headline = child.data;
-                                            if (headline.indexOf(",") === 0){
-                                                headline = headline.substr(1);
-                                            }
-                                            output.push("**" + headline + "**\n");
+                                            output.push(headline);
                                         }
                                     }
                                 });
@@ -109,7 +108,10 @@ class OSRSScraper {
                     }
                 });
 
-                this.body = output + "\n";
+                output.forEach((line) => {
+                    this.body += "- *" + line + "*\n";
+                });
+
                 resolve();
             }).catch((error) => { return reject(error); })
         });
