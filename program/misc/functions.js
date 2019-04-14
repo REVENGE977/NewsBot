@@ -6,7 +6,7 @@ function GetCommandDescription(command){
     output += "Syntax:                " + command.syntax + "\n";
     output += "Example:             " + command.example + "\n";
 
-    if (command.argvalues){
+    if (!(command.argvalues === undefined || command.argvalues.length === 0)){
         output += "\nAllowed argument values: " + command.argvalues + "\n";
     }
 

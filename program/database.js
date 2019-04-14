@@ -53,7 +53,7 @@ class Database {
         let sql = "DELETE FROM NewsBot.channels WHERE game = ? && channelID = ?";
         let args = [game,channelID];
 
-        await this.query(sql, args);
+        return await this.query(sql, args);
     }
     /* Get all stored Discord channels from DB */
     async GetChannels(game){
