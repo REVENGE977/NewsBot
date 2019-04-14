@@ -53,6 +53,70 @@ class CSGOScraper {
     }
 }
 
+class OSRSScraper {
+    constructor(){
+        this.url = "https://oldschool.runescape.com/";
+    }
+
+    GetNewsLink(){
+        return new Promise((resolve, reject) => {
+            rp(this.url).then((html) => {
+                let articles = $("article.news-article", html);
+
+                for (let i = 0; i < articles.length; i++){
+                    if ($("span.news-article__sub", html)[i].children[0].data === "Game Updates "){
+                        this.link = $("h3.news-article__title > a", html)[i].attribs.href;
+                        break;
+                    }
+                }
+                resolve();
+            }).catch((error) => { return reject(error); });
+        });
+    }
+
+    GetNewsTitle(){
+        return new Promise((resolve, reject) => {
+            rp(this.link).then((html) => {
+                this.title = $("#osrsArticleHolder > div.left > h2", html)[0].children[0].data;
+                resolve();
+            }).catch((error) => { return reject(error); })
+        });
+    }
+    GetNewsBody(){
+        return new Promise((resolve, reject) => {
+            let output = [];
+            rp(this.link).then((html) => {
+
+                let articleHolderChildren = $(".osrsArticleContentText", html)[0].children;
+
+                articleHolderChildren.forEach((child) => {
+                    if (child.name === "center"){
+                        child.children.forEach((child) => {
+                            if (child.name === "font"){
+                                child.children.forEach((child) => {
+                                    if (child.type === "text"){
+                                        if (child.data !== "\n"){
+                                            let headline = child.data;
+                                            if (headline.indexOf(",") === 0){
+                                                headline = headline.substr(1);
+                                            }
+                                            output.push("**" + headline + "**\n");
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+
+                this.body = output + "\n";
+                resolve();
+            }).catch((error) => { return reject(error); })
+        });
+    }
+}
+
 module.exports = {
-    CSGOScraper: CSGOScraper
+    CSGOScraper: CSGOScraper,
+    OSRSScraper: OSRSScraper
 };

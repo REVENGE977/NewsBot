@@ -1,6 +1,6 @@
 const cron = require('node-cron');
 const Discord = require('discord.js');
-const GetNewestCSGOUpdate = require("./scraperhandler").GetCSGOUpdate;
+const ScraperHandler = require("./scraperhandler");
 const DatabaseCL = require("./database").Database;
 
 class Scheduler {
@@ -39,10 +39,9 @@ class Scheduler {
 
         switch(game){
             case 'csgo':
-
                 image = "counter_strike_wallpaper.png";
 
-                scraperOutput = await GetNewestCSGOUpdate();
+                scraperOutput = await ScraperHandler.GetCSGOUpdate();
 
                 link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
 
@@ -61,6 +60,22 @@ class Scheduler {
                     return "\n**" + original + "**";
                 });
 
+                break;
+            case 'osrs':
+                image = "oldschool.png";
+
+                scraperOutput = await ScraperHandler.GetOSRSUpdate();
+
+                link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
+
+                messageTitle = "__**Latest OSRS update:**__\n\n";
+
+                if (sender === "bot"){
+                    messageTitle = "__**New OSRS update release!**__\n\n";
+                    if (await this.Database.NewsArticleExists(game,title)){ return console.log("Old article"); }
+                }
+
+                messageTitle += "*Update highlights*: \n\n";
                 break;
             default:
                 throw new Error("Invalid game: " + game);

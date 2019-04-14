@@ -8,7 +8,8 @@ const Scheduler = new SchedulerCL();
 const GetCommandDescription = require('./misc/functions').GetCommandDescription;
 
 const SupportedGames = [
-    "csgo"
+    "csgo",
+    "osrs"
 ];
 
 
