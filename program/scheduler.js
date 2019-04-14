@@ -1,6 +1,6 @@
 const cron = require('node-cron');
 const DatabaseCL = require("./database").Database;
-const functions = require('./misc/functions');
+const Functions = require('./misc/functions');
 
 class Scheduler {
     constructor(Timer = "0 */30 * * * *"){
@@ -9,8 +9,8 @@ class Scheduler {
         this.Database = new DatabaseCL();
         this.CRONSchedule = cron.schedule(Timer, () => {
             console.log("News getter scheduled...");
-            functions.SendNewsArticle("csgo",[],"bot");
-            functions.SendNewsArticle("csgo",[],"bot");
+            Functions.SendNewsArticle("csgo",[],"bot");
+            Functions.SendNewsArticle("csgo",[],"bot");
             }, { scheduled: false, timezone: "Europe/Helsinki" });
     }
 

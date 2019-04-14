@@ -1,7 +1,7 @@
 const Validator = require('./validator').Validator;
 const DatabaseCL = require('./database').Database;
 const SchedulerCL = require('./scheduler').Scheduler;
-const functions = require('./misc/functions');
+const Functions = require('./misc/functions');
 
 const Database = new DatabaseCL();
 const Scheduler = new SchedulerCL();
@@ -99,7 +99,7 @@ const Commands = {
                 throw new Error("Invalid arguments in command.");
             }
             message.reply("Getting news article, please wait...").then((msg) => msg.delete(3500));
-            return await functions.SendNewsArticle(args[0],[message.channel.id]);
+            return await Functions.SendNewsArticle(args[0],[message.channel.id]);
         }
     },
     schedulestart: {
