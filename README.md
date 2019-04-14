@@ -16,7 +16,7 @@ This makes it easy to keep track of game updates without leaving the comfort of 
 * *CS:GO*
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 | *csgo*
 * *Oldschool Runescape* &nbsp;&nbsp;&nbsp;| *osrs*
 
