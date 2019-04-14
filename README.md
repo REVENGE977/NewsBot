@@ -2,9 +2,9 @@
 
 NewsBot is a Discord bot which crawls various game's websites, such as the
 [CS:GO updates](https://blog.counter-strike.net/index.php/category/updates/) 
--page for CS:GO and checks for new update articles every 2 hours.
+-page or [OSRS homepage](https://oldschool.runescape.com/) and checks for new news articles every 30 minutes.
 
-Whenever there is a new update article, it will send the article as a Discord message to all Discord channels 
+Whenever there is a new article, it will send the article as a Discord message to all Discord channels 
 that are subscribed to that game's news schedule.
 
 **Purpose**: The purpose of this Discord bot is to automate sending updates about various games to Discord servers. 
@@ -12,17 +12,18 @@ This makes it easy to keep track of game updates without leaving the comfort of 
 
 ## List of supported games
 **Left: Game name | Right: command**
-* CS:GO | csgo
+* CS:GO                 | csgo
+* Oldschool Runescape   | osrs
 
 ## How to use the bot
-* Add this bot to your Discord server with 
+* Invite this bot to your Discord server with 
 [this link](https://discordapp.com/api/oauth2/authorize?client_id=562687174697549856&permissions=522304&scope=bot).
 
-* Add the desired Discord text channel and game to the news schedule by writing the command `!addchannel <game>`.
+* Add the desired game to the news schedule by writing the command `!addchannel <game>`. Any updates will be sent to the channel this command was run on.
 
-* If you want to remove a game from the news schedule, write the command `!removechannel <game>`.
+* If you want to remove a game from the news schedule, write the command `!removechannel <game>`. The current channel will be removed from the news schedule.
 
-* Get the latest update article instantly by writing the command `!getupdate <game>` on the desired Discord 
+* Get the latest news article instantly by writing the command `!news <game>` on the desired Discord 
 text channel.
 
 ## Want to build your own version of this bot?
@@ -35,7 +36,7 @@ text channel.
   * Enter the '`program`' -directory. With Node.js installed, run this command to install depencencies:
   
     ```
-    npm install --save mysql discord.js node-cron request request-promise cheerio puppeteer
+    npm install --save mysql discord.js node-cron request request-promise cheerio
     ```
   
 
@@ -80,29 +81,31 @@ text channel.
     ```
 
 
-* Using the command line or terminal, navigate to the target directory.
-
-  * **You should now be able to run the bot** using
+* **You should now be able to run the bot** using
     ```
     node program/index.js
     ```
+    or
+    ```
+    node index.js
+    ```
 
 
-
-* Stop the bot and add the line `message.reply(message.author.id);` anywhere in Index.js after the line
+* Stop the bot and add the line `message.reply(message.author.id);` anywhere inside this function in `index.js`:
     ```
     client.on("message", () => { 
+    
+     });
     ```
 
-    * Start the bot again and invite it to a Discord server and type anything in any channel. The bot will spew out numbers. Take the first number the bot responds with. That's your AdminID. Copy it, and in `private.js`, replace "AdminID placeholder" with the AdminID you just got.
-    * Remove the line you added and restart the bot.
+    * Start the bot again, invite it to a Discord server and type anything in any channel. The bot will spew out numbers. Take the first number the bot responds with. That's your AdminID. Copy it, and in `private.js`, replace "AdminID placeholder" with the AdminID you just got.
+    * Remove the line you added to `index.js` and restart the bot.
 
 
 ## Want to contribute to this repository?
 Any contributions are welcome! Currently, these are the main issues with this repo:
-* No proper error handling in places
-* Non-OOP sections of the codebase
 * Inconsistency across files and functions
+* Lack of supported games
 
 ### Have a suggestion or question?
 We're open to suggestions and questions! Please send your message to 
