@@ -13,12 +13,12 @@ This makes it easy to keep track of game updates without leaving the comfort of 
 ## List of supported games
 
 **Left: Game name | Right: command**
-* CS:GO
+* *CS:GO*
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-| csgo
-* Oldschool Runescape&nbsp;&nbsp;&nbsp;| osrs
+| *csgo*
+* *Oldschool Runescape* &nbsp;&nbsp;&nbsp;| *osrs*
 
 
 ## How to use the bot
