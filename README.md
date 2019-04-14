@@ -11,9 +11,15 @@ that are subscribed to that game's news schedule.
 This makes it easy to keep track of game updates without leaving the comfort of your Discord server.
 
 ## List of supported games
+
 **Left: Game name | Right: command**
-* CS:GO                 | csgo
-* Oldschool Runescape   | osrs
+* CS:GO
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+| csgo
+* Oldschool Runescape&nbsp;&nbsp;&nbsp;| osrs
+
 
 ## How to use the bot
 * Invite this bot to your Discord server with 
