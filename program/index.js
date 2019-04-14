@@ -15,8 +15,21 @@ client.on("ready", () => {
 
     client.on("message", (message) => {
 
+        let handler = new CommandHandler(message);
+        handler.HandleMessage();
+
+    });
+});
+
+class CommandHandler {
+    constructor(message){
+        this.message = message;
+    }
+
+    HandleMessage(){
+
         /* Split command by space */
-        let args = message.toString().split(" "), command = args[0];
+        let args = this.message.toString().split(" "), command = args[0];
 
         /* Remove 'command' from args */
         args.splice(0,1);
@@ -36,8 +49,8 @@ client.on("ready", () => {
 
         /* Check for admin requirement */
         if (command.requireAdmin){
-            if (message.author.id !== AdminID){
-                return message.reply("Admin privileges are required to run \"" + command.name + "\".");
+            if (this.message.author.id !== AdminID){
+                return this.message.reply("Admin privileges are required to run \"" + command.name + "\".");
             }
         }
 
@@ -50,11 +63,11 @@ client.on("ready", () => {
                 }
             });
 
-            if (invalidCommand[0]){ return message.reply("Invalid command argument: " + invalidCommand[1]); }
+            if (invalidCommand[0]){ return this.message.reply("Invalid command argument: " + invalidCommand[1]); }
         }
 
         /* Run command defined in commands.js */
-        command.run(message, args)
+        command.run(this.message, args)
             .then((result) => {
                 /* If function is "sendupdate" ... */
                 if (result.name === "sendupdate"){
@@ -68,12 +81,12 @@ client.on("ready", () => {
                         }
                     })
                 } else {
-                    return message.reply(result);
+                    return this.message.reply(result);
                 }
             })
             .catch((error) => {
                 console.error(error);
-                return message.reply(error.message);
+                return this.message.reply(error.message);
             });
-    });
-});
+    }
+}
