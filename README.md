@@ -25,9 +25,9 @@ This makes it easy to keep track of game updates without leaving the comfort of 
 * Invite this bot to your Discord server with 
 [this link](https://discordapp.com/api/oauth2/authorize?client_id=562687174697549856&permissions=522304&scope=bot).
 
-* Add the desired game to the news schedule by writing the command `!addchannel <game>`. Any updates will be sent to the channel this command was run on.
+* Add the desired game to the news schedule by writing the command `!addgame <game>`. Any updates will be sent to the channel this command was run on.
 
-* If you want to remove a game from the news schedule, write the command `!removechannel <game>`. The current channel will be removed from the news schedule.
+* If you want to remove a game from the news schedule, write the command `!removegame <game>`. The current channel will be removed from the news schedule.
 
 * Get the latest news article instantly by writing the command `!news <game>` on the desired Discord 
 text channel.
