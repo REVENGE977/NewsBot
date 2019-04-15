@@ -1,6 +1,18 @@
 {
-  "name": "CSGONewsBot",
-  "version": "1.0.0",
+  "name": "NewsBot",
+  "version": "2.0",
+  "author": "Zecuel",
+  "license": "MIT",
+  "description": "Discord bot which sends news articles of games to specific Discord channels automatically.",
+  "main": "program/index.js",
+  "directories": {
+    "program": "program",
+    "tests": "tests",
+    "misc": "program/misc"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "discord": "^0.8.2",
@@ -10,5 +22,9 @@
     "puppeteer": "^1.14.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.3"
   }
 }

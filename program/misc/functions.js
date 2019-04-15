@@ -1,5 +1,6 @@
-const ScraperHandler = require('../scraperhandler');
 const Discord = require("discord.js");
+const DatabaseCL = require('../database').Database;
+const ScraperHandler = require('../scraperhandler');
 
 function GetCommandDescription(command){
     let output = "\n";
@@ -19,12 +20,14 @@ function GetCommandDescription(command){
 
 async function SendNewsArticle(game, channels = [], sender = "user", ){
 
+    const Database = new DatabaseCL();
+
     console.log("Sending news article...");
 
     let scraperOutput, link, title, body, image, messageTitle;
 
     if (sender === "bot"){
-        channels = await this.Database.GetChannels(game);
+        channels = await Database.GetChannels(game);
     }
 
     switch(game){
@@ -39,7 +42,7 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
 
             if (sender === "bot"){
                 messageTitle = "__**New CS:GO update released!**__\n";
-                if (await this.Database.NewsArticleExists(game,title)){ return console.log("Old article."); }
+                if (await Database.NewsArticleExists(game,title)){ return console.log("Old article."); }
             }
 
 
@@ -62,7 +65,7 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
 
             if (sender === "bot"){
                 messageTitle = "__**New OSRS update release!**__\n\n";
-                if (await this.Database.NewsArticleExists(game,title)){ return console.log("Old article"); }
+                if (await Database.NewsArticleExists(game,title)){ return console.log("Old article"); }
             }
 
             messageTitle += "__**Update topics**__: \n";

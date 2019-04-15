@@ -1,0 +1,11 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "description": "Unit tests for NewsBot",
+  "main": "tests.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Zecuel",
+  "license": "MIT"
+}

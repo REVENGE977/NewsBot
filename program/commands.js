@@ -18,10 +18,10 @@ const Commands = {
     help: {
         requireAdmin: false,
         name: "help",
-        command: "!help",
+        command: "!nb help",
         description: "Show useful information about a command or show list of commands.",
-        syntax: "!help ?<command>",
-        example: "!help getupdate",
+        syntax: "!nb help ?<command>",
+        example: "!nb help getupdate",
         argvalues: [
 
         ],
@@ -38,7 +38,7 @@ const Commands = {
                 response = GetCommandDescription(command);
             } else {
                 response =  "";
-                response += "To learn more about a command, type \"!help <command>\".\n";
+                response += "To learn more about a command, type \"!nb help <command>\".\n";
                 response += "Here are all of my commands:\n\n";
 
                 for (let key in Commands){
@@ -51,10 +51,10 @@ const Commands = {
     addgame: {
         requireAdmin: false,
         name: "addgame",
-        command:"!addgame",
+        command:"!nb addgame",
         description: "Adds current channel to update article schedule for the given game.",
-        syntax: "!addgame <game>",
-        example: "!addgame csgo",
+        syntax: "!nb addgame <game>",
+        example: "!nb addgame csgo",
         argvalues: SupportedGames,
         run: async function(message, args){
             if (!Validator.validateArguments([args[0], message.channel.id])){
@@ -70,10 +70,10 @@ const Commands = {
     removegame: {
         requireAdmin: false,
         name: "removegame",
-        command: "!removegame",
+        command: "!nb removegame",
         description: "Removes current channel from update article schedule for the given game.",
-        syntax: "!removegame <game>",
-        example: "!removegame csgo",
+        syntax: "!nb removegame <game>",
+        example: "!nb removegame csgo",
         argvalues: SupportedGames,
         run: async function(message, args){
             if (!Validator.validateArguments([args[0], message.channel.id])){
@@ -89,10 +89,10 @@ const Commands = {
     news: {
         requireAdmin: false,
         name: "news",
-        command: "!news",
+        command: "!nb news",
         description: "Sends the latest news article for the given game to current channel.",
-        syntax: "!news <game>",
-        example: "!news csgo",
+        syntax: "!nb news <game>",
+        example: "!nb news csgo",
         argvalues: SupportedGames,
         run: async function(message, args){
             if (!Validator.validateArguments([args[0]])){
@@ -105,10 +105,10 @@ const Commands = {
     schedulestart: {
         requireAdmin: true,
         name: "schedulestart",
-        command: "!schedulestart",
+        command: "!nb schedulestart",
         description: "Starts update schedule. Only available to admin.",
-        syntax: "!schedulestart",
-        example: "!schedulestart",
+        syntax: "!nb schedulestart",
+        example: "!nb schedulestart",
         argvalues: [
 
         ],
@@ -119,10 +119,10 @@ const Commands = {
     schedulestop: {
         requireAdmin: true,
         name: "schedulestop",
-        command: "!schedulestop",
+        command: "!nb schedulestop",
         description: "Stops update schedule. Only available to admin.",
-        syntax: "!schedulestop",
-        example: "!schedulestop",
+        syntax: "!nb schedulestop",
+        example: "!nb schedulestop",
         argvalues: [
 
         ],

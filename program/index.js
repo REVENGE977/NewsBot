@@ -31,20 +31,22 @@ class CommandHandler {
         /* Split command by space */
         let args = this.message.toString().split(" "), command = args[0];
 
-        /* Remove 'command' from args */
+        /* Remove prefix from args */
         args.splice(0,1);
 
         /* Ignore non-commands */
-        if (!command.startsWith("!")){ return; }
+        if (!command.startsWith("!nb")){ return; }
 
-        /* Remove exclamation mark */
-        command = command.substr(1);
+        command = args[0];
+
+        /* Remove command from args */
+        args.splice(0,1);
 
         /* From a Command -object */
         if (command in Commands){
             command = Commands[command];
         } else {
-            return message.reply("Unknown command: " + command + "\nIf you need help, type \"!help\"")
+            return this.message.reply("Unknown command: " + command + "\nIf you need help, type \"!nb help\"")
         }
 
         /* Check for admin requirement */
