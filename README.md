@@ -27,11 +27,14 @@ This makes it easy to keep track of game updates without leaving the comfort of 
 
 * All commands start with `!nb`. To get a list of supported commands, run `!nb help`.
 
-* Add the desired game to the news schedule by running the command `!nb addgame <game>`. Any updates will be sent to the channel this command was run on.
+Useful commands:
+  * Add the desired game to the news schedule by running the command `!nb addgame <game>`.<br>
+  Updates will be sent to the channel this command was run on.
 
-* If you want to remove a game from the news schedule, run the command `!nb removegame <game>`. The current channel will be removed from the news schedule.
+  * If you want to remove a game from the news schedule, run the command `!nb removegame <game>`. <br>
+  The current channel will be removed from the news schedule.
 
-* Get the latest news article instantly by running the command `!nb news <game>` on the desired Discord 
+  * Get the latest news article instantly by running the command `!nb news <game>` on the desired Discord 
 text channel.
 
 ## Want to build your own version of this bot?
