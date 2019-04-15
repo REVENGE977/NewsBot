@@ -4,6 +4,7 @@
   "author": "Zecuel",
   "license": "MIT",
   "description": "Discord bot which sends news articles of games to specific Discord channels automatically.",
+  "repository": "https://github.com/Zecuel/NewsBot",
   "main": "program/index.js",
   "directories": {
     "program": "program",
@@ -15,7 +16,6 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "discord": "^0.8.2",
     "discord.js": "^11.4.2",
     "mysql": "^2.16.0",
     "node-cron": "^2.0.3",
