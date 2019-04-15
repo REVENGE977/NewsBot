@@ -1,17 +1,17 @@
 {
   "name": "NewsBot",
-  "version": "2.0",
+  "version": "1.0.0",
   "author": "Zecuel",
   "license": "MIT",
   "description": "Discord bot which sends news articles of games to specific Discord channels automatically.",
   "main": "program/index.js",
   "directories": {
     "program": "program",
-    "tests": "tests",
+    "test": "program/test",
     "misc": "program/misc"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha program/test"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",

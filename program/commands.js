@@ -106,7 +106,7 @@ const Commands = {
         requireAdmin: true,
         name: "schedulestart",
         command: "!nb schedulestart",
-        description: "Starts update schedule. Only available to admin.",
+        description: "Starts update schedule.",
         syntax: "!nb schedulestart",
         example: "!nb schedulestart",
         argvalues: [
@@ -120,7 +120,7 @@ const Commands = {
         requireAdmin: true,
         name: "schedulestop",
         command: "!nb schedulestop",
-        description: "Stops update schedule. Only available to admin.",
+        description: "Stops update schedule.",
         syntax: "!nb schedulestop",
         example: "!nb schedulestop",
         argvalues: [
