@@ -10,7 +10,7 @@ class Scheduler {
         this.CRONSchedule = cron.schedule(Timer, () => {
             console.log("News getter scheduled...");
             Functions.SendNewsArticle("csgo",[],"bot");
-            Functions.SendNewsArticle("csgo",[],"bot");
+            Functions.SendNewsArticle("osrs",[],"bot");
             }, { scheduled: false, timezone: "Europe/Helsinki" });
     }
 
