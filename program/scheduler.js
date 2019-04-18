@@ -1,16 +1,60 @@
+const Discord = require('discord.js');
+
+const Private = require('./private');
+const BotPass = Private.BotPass;
+
 const cron = require('node-cron');
-const DatabaseCL = require("./database").Database;
 const Functions = require('./misc/functions');
 
 class Scheduler {
-    constructor(Timer = "0 */30 * * * *"){
+    constructor(Timer = "0 */15 * * * *"){
         if (!cron.validate(Timer)){  return console.log("Invalid cron timer."); }
 
-        this.Database = new DatabaseCL();
-        this.CRONSchedule = cron.schedule(Timer, () => {
+        this.CRONSchedule = cron.schedule(Timer, async () => {
             console.log("News getter scheduled...");
-            Functions.SendNewsArticle("csgo",[],"bot");
-            Functions.SendNewsArticle("osrs",[],"bot");
+            const CSGOResult = await Functions.SendNewsArticle("csgo",[],"bot");
+            const OSRSResult = await Functions.SendNewsArticle("osrs",[],"bot");
+
+            const client = new Discord.Client();
+
+            client.login(BotPass);
+            client.on('ready', () =>  {
+                if (CSGOResult){
+                    CSGOResult.channels.forEach((channel) => {
+                        let embed = CSGOResult.embed;
+                        console.log(channel);
+                        try {
+                            if (!client.channels.get(channel)){
+                                return console.log("Unavailable channel: " + channel);
+                            }
+                            if (embed){
+                                client.channels.get(channel).send(CSGOResult.messageTitle + CSGOResult.body, { embed });
+                            } else {
+                                client.channels.get(channel).send(CSGOResult.messageTitle + CSGOResult.body);
+                            }
+                        } catch (error){
+                            return console.error(error);
+                        }
+                    });
+                }
+                if (OSRSResult){
+                    OSRSResult.channels.forEach((channel) => {
+                        let embed = OSRSResult.embed;
+                        try {
+                            if (!client.channels.get(channel)){
+                                return console.log("Unavailable channel: " + channel);
+                            }
+                            if (embed){
+                                client.channels.get(channel).send(OSRSResult.messageTitle + OSRSResult.body, { embed });
+                            } else {
+                                client.channels.get(channel).send(OSRSResult.messageTitle + OSRSResult.body);
+                            }
+                        } catch (error){
+                            return console.error(error);
+                        }
+                    });
+                }
+            });
             }, { scheduled: false, timezone: "Europe/Helsinki" });
     }
 

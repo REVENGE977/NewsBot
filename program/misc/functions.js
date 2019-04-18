@@ -92,7 +92,7 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
     }
 
     if (sender === "bot"){
-        if (!await this.Database.AddNewsArticle(game,title)){
+        if (!await Database.AddNewsArticle(game,title)){
             return console.log("Error while adding news article to DB!");
         }
     }
