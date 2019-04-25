@@ -55,6 +55,8 @@ class Scheduler {
                     });
                 }
             });
+
+            client.destroy();
             }, { scheduled: false, timezone: "Europe/Helsinki" });
     }
 

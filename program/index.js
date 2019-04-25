@@ -3,6 +3,8 @@ const client = new Discord.Client();
 
 const Commands = require('./commands').Commands;
 
+const SchedulerCL = require('./scheduler').Scheduler;
+
 const Private = require('./private');
 const BotPass = Private.BotPass;
 const AdminID = Private.AdminID;
@@ -12,6 +14,9 @@ client.login(BotPass);
 client.on("ready", () => {
 
     console.log("Bot connected!");
+
+    const Scheduler = new SchedulerCL();
+    Scheduler.StartSchedule();
 
     client.on("message", (message) => {
 

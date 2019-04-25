@@ -1,4 +1,0 @@
-TODO: ERROR HANDLING
-    -> try/catch await
-    -> throw (new) Error()
-    -> message.reply(error.MESSAGE)
