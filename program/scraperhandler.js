@@ -31,8 +31,11 @@ async function GetOSRSUpdate(){
        scraper.GetNewsBody()
     ]);
 
-    if (!scraper.title || !scraper.body){
-        throw new Error("Error while getting news article title or body.");
+    if (!scraper.title) {
+        throw new Error("Error while getting news article title.");
+    }
+    if (!scraper.body) {
+        throw new Error("Error while getting news article body.");
     }
 
     return [scraper.link, scraper.title, scraper.body];
