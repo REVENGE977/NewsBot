@@ -27,11 +27,16 @@ class Scheduler {
                             if (!client.channels.get(channel)){
                                 return console.log("Unavailable channel: " + channel);
                             }
+
+                            client.channels.get(channel).send(CSGOResult.messageTitle);
+                            CSGOResult.bodies.forEach((body) => {
+                                client.channels.get(channel).send(body);
+                            });
+
                             if (embed){
-                                client.channels.get(channel).send(CSGOResult.messageTitle + CSGOResult.body, { embed });
-                            } else {
-                                client.channels.get(channel).send(CSGOResult.messageTitle + CSGOResult.body);
+                                client.channels.get(channel).send("", { embed });
                             }
+
                         } catch (error){
                             return console.error(error);
                         }
@@ -44,10 +49,14 @@ class Scheduler {
                             if (!client.channels.get(channel)){
                                 return console.log("Unavailable channel: " + channel);
                             }
+
+                            client.channels.get(channel).send(OSRSResult.messageTitle);
+                            OSRSResult.bodies.forEach((body) => {
+                                client.channels.get(channel).send(body);
+                            });
+
                             if (embed){
-                                client.channels.get(channel).send(OSRSResult.messageTitle + OSRSResult.body, { embed });
-                            } else {
-                                client.channels.get(channel).send(OSRSResult.messageTitle + OSRSResult.body);
+                                client.channels.get(channel).send("", { embed });
                             }
                         } catch (error){
                             return console.error(error);

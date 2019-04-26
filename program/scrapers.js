@@ -1,6 +1,8 @@
 const rp = require('request-promise');
 const $ = require('cheerio');
 
+const MAX_CHAR_LIMIT = 2000;
+
 class CSGOScraper {
     constructor(){
         this.url = "https://blog.counter-strike.net/index.php/category/updates/";
@@ -25,7 +27,8 @@ class CSGOScraper {
     }
     GetNewsBody(){
         return new Promise((resolve, reject) => {
-            let output = [];
+            let output = [], bodies = [];
+
             rp(this.link).then((html) => {
 
                 let childCount = $("div.inner_post p", html).length;
@@ -40,13 +43,21 @@ class CSGOScraper {
                 }
 
                 let body = "";
+
                 output.forEach((line) => {
+                    if (body.length + line.length >= MAX_CHAR_LIMIT){
+                        bodies.push(body);
+                        body = "";
+                    }
                     body += line;
                     if (!line.endsWith("\n")){ body += "\n"; }
                 });
+
                 body += "\n";
 
-                this.body = body;
+                bodies.push(body);
+
+                this.bodies = bodies;
                 resolve();
             }).catch((error) => { return reject(error); })
         });
@@ -84,13 +95,10 @@ class OSRSScraper {
     }
     GetNewsBody(){
         return new Promise((resolve, reject) => {
-            let output = [];
+            let output = [], bodies = [];
             rp(this.link).then((html) => {
 
-                let body = "";
-
                 let articleHolderChildren = $(".osrsArticleContentText", html)[0].children;
-
 
                 articleHolderChildren.forEach((child) => {
                     if (child.name === "hmtl") {
@@ -113,12 +121,19 @@ class OSRSScraper {
                     }
                 });
 
+                let body = "";
+
                 output.forEach((line) => {
+                    if (body.length + line.length >= MAX_CHAR_LIMIT) {
+                        bodies.push(body);
+                        body = "";
+                    }
                     body += "- *" + line + "*\n";
                 });
 
-                this.body = body;
+                bodies.push(body);
 
+                this.bodies = bodies;
                 resolve();
             }).catch((error) => { return reject(error); })
         });

@@ -12,11 +12,14 @@ async function GetCSGOUpdate(){
         scraper.GetNewsBody()
     ]);
 
-    if (!scraper.title || !scraper.body){
-        throw new Error("Error while getting news article title or body.");
+    if (!scraper.title) {
+        throw new Error("Error while getting news article title.");
+    }
+    if (!scraper.bodies) {
+        throw new Error("Error while getting news article body.");
     }
 
-    return [scraper.link, scraper.title, scraper.body];
+    return [scraper.link, scraper.title, scraper.bodies];
 }
 
 async function GetOSRSUpdate(){
@@ -34,11 +37,11 @@ async function GetOSRSUpdate(){
     if (!scraper.title) {
         throw new Error("Error while getting news article title.");
     }
-    if (!scraper.body) {
+    if (!scraper.bodies) {
         throw new Error("Error while getting news article body.");
     }
 
-    return [scraper.link, scraper.title, scraper.body];
+    return [scraper.link, scraper.title, scraper.bodies];
 }
 
 module.exports = {

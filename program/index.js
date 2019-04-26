@@ -80,11 +80,14 @@ class CommandHandler {
                 if (result.name === "sendupdate"){
                     result.channels.forEach((channel) => {
                         let embed = result.embed;
-                        try {
-                            if (embed){ client.channels.get(channel).send(result.messageTitle + result.body, { embed }); }
-                            else { client.channels.get(channel).send(result.messageTitle + result.body); }
-                        } catch (error){
-                            return console.error(error);
+
+                        client.channels.get(channel).send(result.messageTitle);
+                        result.bodies.forEach((body) => {
+                            client.channels.get(channel).send(body);
+                        });
+
+                        if (embed){
+                            client.channels.get(channel).send("", { embed });
                         }
                     })
                 } else {

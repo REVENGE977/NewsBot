@@ -24,7 +24,7 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
 
     console.log("Sending news article...");
 
-    let scraperOutput, link, title, body, image, messageTitle;
+    let scraperOutput, link, title, bodies, image, messageTitle;
 
     if (sender === "bot"){
         channels = await Database.GetChannels(game);
@@ -36,7 +36,7 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
 
             scraperOutput = await ScraperHandler.GetCSGOUpdate();
 
-            link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
+            link = scraperOutput[0]; title = scraperOutput[1]; bodies = scraperOutput[2];
 
             messageTitle = "__**Latest CS:GO news:**__\n";
 
@@ -46,11 +46,15 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
             }
 
 
-            body = body.replace(/(\[[A-Za-z0-9]+])/g, (original) => {
-                return "\n**" + original + "**";
+            bodies.forEach((body)  => {
+                body.replace(/(\[[A-Za-z0-9]+])/g, (original) => {
+                    return "\n**" + original + "**";
+                });
             });
-            body = body.replace(/([A-Za-z0-9]+[:])/g, (original) => {
-                return "\n**" + original + "**";
+            bodies.forEach((body) => {
+                body.replace(/([A-Za-z0-9]+[:])/g, (original) => {
+                    return "\n**" + original + "**";
+                });
             });
 
             break;
@@ -59,7 +63,7 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
 
             scraperOutput = await ScraperHandler.GetOSRSUpdate();
 
-            link = scraperOutput[0]; title = scraperOutput[1]; body = scraperOutput[2];
+            link = scraperOutput[0]; title = scraperOutput[1]; bodies = scraperOutput[2];
 
             messageTitle = "__**Latest OSRS news:**__\n\n";
 
@@ -79,7 +83,9 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
         throw new Error("Invalid arguments in command.");
     }
 
-    body = body.replace(undefined, "");
+    bodies.forEach((body) => {
+        body.replace(undefined, "");
+    });
 
     const embed = new Discord.RichEmbed()
         .setTitle("__**" + title + "**__")
@@ -101,7 +107,7 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
         name: "sendupdate",
         channels: channels,
         messageTitle: messageTitle,
-        body: body,
+        bodies: bodies,
         embed: embed
     }
 }
