@@ -33,7 +33,7 @@ class Scheduler {
                                 });
 
                                 if (embed){
-                                    client.channels.get(channel).send("", { embed });
+                                    client.channels.get(channel).send(embed);
                                 }
                             });
 
@@ -56,7 +56,7 @@ class Scheduler {
                             });
 
                             if (embed){
-                                client.channels.get(channel).send("", { embed });
+                                client.channels.get(channel).send(embed);
                             }
                         } catch (error){
                             return console.error(error);
