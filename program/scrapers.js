@@ -101,19 +101,15 @@ class OSRSScraper {
                 let articleHolderChildren = $(".osrsArticleContentText", html)[0].children;
 
                 articleHolderChildren.forEach((child) => {
-                    if (child.name === "hmtl") {
+                    if (child.name === "center"){
                         child.children.forEach((child) => {
-                            if (child.name === "center"){
+                            if (child.name === "font"){
                                 child.children.forEach((child) => {
-                                    if (child.name === "font"){
-                                        child.children.forEach((child) => {
-                                            if (child.type === "text"){
-                                                if (child.data !== "\n"){
-                                                    let headline = child.data;
-                                                    output.push(headline);
-                                                }
-                                            }
-                                        });
+                                    if (child.type === "text"){
+                                        if (child.data !== "\n"){
+                                            let headline = child.data;
+                                            output.push(headline);
+                                        }
                                     }
                                 });
                             }
