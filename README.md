@@ -19,6 +19,11 @@ This makes it easy to keep track of game updates without leaving the comfort of 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 | *csgo*
 * *Oldschool Runescape* &nbsp;&nbsp;&nbsp;| *osrs*
+* *Dota2*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| *dota2*
 
 
 ## How to use the bot
