@@ -38,10 +38,10 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
 
             link = scraperOutput[0]; title = scraperOutput[1]; bodies = scraperOutput[2];
 
-            messageTitle = "__**Latest CS:GO news:**__\n";
+            messageTitle = "__**Latest CS:GO news:**__";
 
             if (sender === "bot"){
-                messageTitle = "__**New CS:GO update released!**__\n";
+                messageTitle = "__**New CS:GO update released!**__";
                 const exists = await Database.NewsArticleExists(game,title);
                 if (exists) { return console.log("Old article."); }
             }
@@ -65,15 +65,33 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
 
             link = scraperOutput[0]; title = scraperOutput[1]; bodies = scraperOutput[2];
 
-            messageTitle = "__**Latest OSRS news:**__\n\n";
+            messageTitle = "__**Latest OSRS news:**__";
 
             if (sender === "bot"){
-                messageTitle = "__**New OSRS update release!**__\n\n";
+                messageTitle = "__**New OSRS update release!**__";
                 const exists = await Database.NewsArticleExists(game,title);
                 if (exists) { return console.log("Old article."); }
             }
 
-            messageTitle += "__**Update topics**__: \n";
+            break;
+        case 'dota2':
+            image = "dota2.jpg";
+
+            scraperOutput = await ScraperHandler.GetDOTA2Update();
+
+            link = scraperOutput[0]; title = scraperOutput[1]; bodies = scraperOutput[2];
+
+            messageTitle = "__**Latest DOTA2 news:**__";
+
+            if (sender === "bot"){
+                messageTitle = "__**New DOTA2 update release!**__";
+                const exists = await Database.NewsArticleExists(game,title);
+                if (exists) { return console.log("Old article."); }
+            }
+
+            bodies.forEach((body) => {
+                body.replace(/\t/g, "");
+            });
 
             break;
         default:
@@ -83,6 +101,8 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
     if (!scraperOutput || !channels){
         throw new Error("Invalid arguments in command.");
     }
+
+    bodies[0] = "_ _\n_ _\n" + bodies[0];
 
     bodies.forEach((body) => {
         body.replace(undefined, "");

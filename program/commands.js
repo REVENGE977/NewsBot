@@ -10,7 +10,8 @@ const GetCommandDescription = require('./misc/functions').GetCommandDescription;
 
 const SupportedGames = [
     "csgo",
-    "osrs"
+    "osrs",
+    "dota2"
 ];
 
 
