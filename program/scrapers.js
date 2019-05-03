@@ -174,7 +174,6 @@ class DOTA2Scraper {
                         if (child.data){
                             let data = child.data.replace(/\t/g, "");
                             data = data.replace(/\n/g, "");
-                            console.debug(data);
                             output.push(data);
                         }
                     }
