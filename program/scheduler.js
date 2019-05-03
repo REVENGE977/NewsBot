@@ -28,14 +28,15 @@ class Scheduler {
                                 return console.log("Unavailable channel: " + channel);
                             }
 
-                            client.channels.get(channel).send(CSGOResult.messageTitle);
-                            CSGOResult.bodies.forEach((body) => {
-                                client.channels.get(channel).send(body);
-                            });
+                            client.channels.get(channel).send(CSGOResult.messageTitle).then(() => {
+                                CSGOResult.bodies.forEach((body) => {
+                                    client.channels.get(channel).send(body);
+                                });
 
-                            if (embed){
-                                client.channels.get(channel).send("", { embed });
-                            }
+                                if (embed){
+                                    client.channels.get(channel).send("", { embed });
+                                }
+                            });
 
                         } catch (error){
                             return console.error(error);

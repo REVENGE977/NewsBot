@@ -42,9 +42,9 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
 
             if (sender === "bot"){
                 messageTitle = "__**New CS:GO update released!**__\n";
-                if (await Database.NewsArticleExists(game,title)){ return console.log("Old article."); }
+                const exists = await Database.NewsArticleExists(game,title);
+                if (exists) { return console.log("Old article."); }
             }
-
 
             bodies.forEach((body)  => {
                 body.replace(/(\[[A-Za-z0-9]+])/g, (original) => {
@@ -69,7 +69,8 @@ async function SendNewsArticle(game, channels = [], sender = "user", ){
 
             if (sender === "bot"){
                 messageTitle = "__**New OSRS update release!**__\n\n";
-                if (await Database.NewsArticleExists(game,title)){ return console.log("Old article"); }
+                const exists = await Database.NewsArticleExists(game,title);
+                if (exists) { return console.log("Old article."); }
             }
 
             messageTitle += "__**Update topics**__: \n";
