@@ -22,7 +22,6 @@ class Scheduler {
                 if (CSGOResult){
                     CSGOResult.channels.forEach((channel) => {
                         let embed = CSGOResult.embed;
-                        console.log(channel);
                         try {
                             if (!client.channels.get(channel)){
                                 return console.log("Unavailable channel: " + channel);
